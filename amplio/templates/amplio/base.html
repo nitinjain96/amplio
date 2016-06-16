@@ -47,6 +47,23 @@
     {% block sidebar_content %}{% endblock %}
 </div>
 <!-- Main content -->
-<div class="dimmed pusher"></div>
+<div class="dimmed pusher" id="page">
+    <header>
+        <div id="title">
+            <h1>Amplio</h1>
+            <h2>Your opinions matter</h2>
+        </div>
+        <div id="menu">
+            <button class="ui inverted button"><span class="fa fa-bars"></span>&nbsp;Menu</button>
+        </div>
+        <div id="user">
+            {% block user_block %}{% endblock %}
+        </div>
+    </header>
+    <main></main>
+    <footer>
+        <p>&copy; Dhruv Bhanushali, <em>forever</em>.</p>
+    </footer>
+</div>
 </body>
 </html>
