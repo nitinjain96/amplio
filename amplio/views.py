@@ -20,3 +20,7 @@ def log_in(request):
 
 def compose(request):
     return HttpResponse("Work in progress")
+
+
+def browse(request):
+    return HttpResponse("Work in progress")
