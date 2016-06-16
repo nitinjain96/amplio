@@ -1,0 +1,29 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Dhruv Bhanushali">
+
+    <title>Amplio: {% block title_block %}{% endblock %}</title>
+
+    <!-- Semantic UI CSS -->
+
+    <!-- Base styling for entire website -->
+    <link rel="stylesheet" type="text/css" href="{% static 'amplio/css/base.css' %}">
+    <!-- Page specific styling -->
+    <link rel="stylesheet" type="text/css" href="{% block css_block %}{% endblock %}">
+
+    <!-- Icon font by Font Awesome -->
+    <script src="https://use.fontawesome.com/7e3333d6a1.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <!-- Semantic UI JS -->
+
+    <!-- Custom JS -->
+    <script src="{% static 'amplio/js/script.js' %}"></script>
+</head>
+<body>
+
+</body>
+</html>
