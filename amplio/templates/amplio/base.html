@@ -29,6 +29,7 @@
     <!-- Search box -->
     <div class="item">
         <form action="{% url 'amplio:search' %}" method="post">
+            {% csrf_token %}
             <div class="ui action input">
                 <input type="text" placeholder="Search">
                 <button type="submit" class="ui icon button"><span class="fa fa-search"></span></button>
