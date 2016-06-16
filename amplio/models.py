@@ -1,6 +1,12 @@
+from datetime import datetime
+
+from django.core.files.storage import FileSystemStorage
 from django.db import models
 
 from amplio import choices
+from django_apps import settings
+
+fs = FileSystemStorage(location=settings.STATIC_URL)
 
 
 class User(models.Model):
@@ -11,3 +17,20 @@ class User(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Feedback(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    type = models.CharField(choices=choices.FEEDBACK_TYPE_CHOICES)
+    to = models.CharField(choices=choices.FEEDBACK_TO_CHOICES)
+    category = models.CharField(choices=choices.FEEDBACK_CATEGORY_CHOICES)
+    image = models.ImageField(upload_to='images', storage=fs, blank=True)
+
+    time = models.DateTimeField(default=datetime.now)
+    votes = models.IntegerField(default=0)
+
+    by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
