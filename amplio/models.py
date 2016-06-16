@@ -13,7 +13,7 @@ class User(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password_hash = models.CharField(max_length=2047)
-    post = models.CharField(choices=choices.USER_POST_CHOICES)
+    post = models.IntegerField(choices=choices.USER_POST_CHOICES)
 
     def __str__(self):
         return self.name
@@ -22,9 +22,9 @@ class User(models.Model):
 class Feedback(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    type = models.CharField(choices=choices.FEEDBACK_TYPE_CHOICES)
-    to = models.CharField(choices=choices.FEEDBACK_TO_CHOICES)
-    category = models.CharField(choices=choices.FEEDBACK_CATEGORY_CHOICES)
+    type = models.IntegerField(choices=choices.FEEDBACK_TYPE_CHOICES)
+    to = models.IntegerField(choices=choices.FEEDBACK_TO_CHOICES)
+    category = models.IntegerField(choices=choices.FEEDBACK_CATEGORY_CHOICES)
     image = models.ImageField(upload_to='images', storage=fs, blank=True)
 
     time = models.DateTimeField(default=datetime.now)
