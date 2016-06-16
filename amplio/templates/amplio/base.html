@@ -49,21 +49,28 @@
 <!-- Main content -->
 <div class="dimmed pusher" id="page">
     <header>
+        <!-- Site title -->
         <div id="title">
             <h1>Amplio</h1>
         </div>
+        <!-- Button to show sidebar -->
         <div id="menu">
             <div class="ui animated {% block menu_button %}basic{% endblock %} button" onclick="showSidebar()">
                 <div class="visible content"><span class="fa fa-bars"></span></div>
                 <div class="hidden content">Menu</div>
             </div>
         </div>
+        <!-- Area to show the user functions of logged-in users -->
         <div id="user">
             {% block user_block %}{% endblock %}
         </div>
     </header>
-    <main></main>
+    <!-- Page content -->
+    <main>
+        {% block main_block %}{% endblock %}
+    </main>
     <footer>
+        <!-- Copyright notice -->
         <p>&copy; Dhruv Bhanushali, <em>forever</em>.</p>
     </footer>
 </div>
