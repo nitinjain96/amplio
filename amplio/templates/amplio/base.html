@@ -36,6 +36,15 @@
             </div>
         </form>
     </div>
+    <!-- Navigation -->
+    <div class="item">
+        <div class="header">Navigation</div>
+        <div class="menu">
+            {% block navigation_links %}{% endblock %}
+        </div>
+    </div>
+    <!-- Additional sidebar content -->
+    {% block sidebar_content %}{% endblock %}
 </div>
 <!-- Main content -->
 <div class="dimmed pusher"></div>
