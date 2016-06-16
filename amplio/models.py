@@ -25,7 +25,7 @@ class Feedback(models.Model):
     type = models.IntegerField(choices=choices.FEEDBACK_TYPE_CHOICES)
     to = models.IntegerField(choices=choices.FEEDBACK_TO_CHOICES)
     category = models.IntegerField(choices=choices.FEEDBACK_CATEGORY_CHOICES)
-    image = models.ImageField(upload_to='images', storage=fs, blank=True)
+    image = models.ImageField(upload_to='amplio/images', storage=fs, blank=True)
 
     time = models.DateTimeField(default=datetime.now)
     votes = models.IntegerField(default=0)
