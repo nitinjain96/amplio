@@ -45,3 +45,8 @@ FEEDBACK_CATEGORY_CHOICES = {
     {23: 'Forminator'},
     {24: 'Status'},
 }
+
+COMMENT_UPON_CHOICES = {
+    {1: 'Comment on feedback'},
+    {2: 'Comment on comment'},
+}
