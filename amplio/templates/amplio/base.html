@@ -51,10 +51,12 @@
     <header>
         <div id="title">
             <h1>Amplio</h1>
-            <h2>Your opinions matter</h2>
         </div>
         <div id="menu">
-            <button class="ui inverted button"><span class="fa fa-bars"></span>&nbsp;Menu</button>
+            <div class="ui animated {% block menu_button %}basic{% endblock %} button" onclick="showSidebar()">
+                <div class="visible content"><span class="fa fa-bars"></span></div>
+                <div class="hidden content">Menu</div>
+            </div>
         </div>
         <div id="user">
             {% block user_block %}{% endblock %}
