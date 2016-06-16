@@ -25,7 +25,17 @@
 </head>
 <body>
 <!-- Sidebar -->
-<div class="ui sidebar inverted vertical menu"></div>
+<div class="ui sidebar inverted vertical menu">
+    <!-- Search box -->
+    <div class="item">
+        <form action="{% url 'amplio:search' %}" method="post">
+            <div class="ui action input">
+                <input type="text" placeholder="Search">
+                <button type="submit" class="ui icon button"><span class="fa fa-search"></span></button>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- Main content -->
 <div class="dimmed pusher"></div>
 </body>
