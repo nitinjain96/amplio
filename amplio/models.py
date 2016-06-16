@@ -34,3 +34,18 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    text = models.TextField()
+
+    time = models.DateTimeField(default=datetime.now)
+    upon = models.IntegerField(choices=choices.COMMENT_UPON_CHOICES)
+    votes = models.IntegerField(default=0)
+
+    feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    comment = models.ForeignKey('self', on_delete=models.CASCADE, blank=True)
+    by = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text
