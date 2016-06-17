@@ -19,7 +19,7 @@ def compose(request):
 
 
 def contact(request):
-    return HttpResponse("Work in progress")
+    return render(request, 'amplio/contact.html')
 
 
 def search(request):
