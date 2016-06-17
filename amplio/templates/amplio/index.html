@@ -5,8 +5,6 @@
 
 {% block css_block %}{% static 'amplio/css/index.css' %}{% endblock %}
 
-{% block menu_button %}inverted{% endblock %}
-
 {% block navigation_links %}
     <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
     <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
@@ -19,11 +17,13 @@
         Talk straight to the people here at IMG. Tell us what you want, we'll make sure you're heard.
     </p>
     <div id="call-to-action">
-        <button class="ui inverted button" onclick="goTo('{% url 'amplio:sign_up' %}')">
-            <span class="fa fa-user-plus"></span>&nbsp;Sign up
+        <button class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_up' %}')">
+            <div class="visible content"><span class="fa fa-user-plus"></span></div>
+            <div class="hidden content">Sign up</div>
         </button>
-        <button class="ui inverted button" onclick="goTo('{% url 'amplio:sign_in' %}')">
-            <span class="fa fa-sign-in"></span>&nbsp;Sign in
+        <button class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_in' %}')">
+            <div class="visible content"><span class="fa fa-sign-in"></span></div>
+            <div class="hidden content">Sign in</div>
         </button>
     </div>
 {% endblock %}
