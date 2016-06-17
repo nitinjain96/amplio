@@ -2,3 +2,11 @@
     background: radial-gradient(circle, #046a9d, #27ae60);
     color: white;
 }
+
+header {
+    border-bottom: 1px solid white;
+}
+
+footer {
+    border-top: 1px solid white;
+}
