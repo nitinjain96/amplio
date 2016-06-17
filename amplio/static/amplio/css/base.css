@@ -38,7 +38,10 @@ h1 {
 main {
     display: flex;
     flex-direction: column;
+    margin: auto;
+    min-width: 960px;
     padding: 1em;
+    width: 80%;
     flex-grow: 1;
     justify-content: center;
     align-items: center;
