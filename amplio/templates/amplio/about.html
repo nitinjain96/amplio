@@ -1,0 +1,42 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block css_block %}{% static 'amplio/css/index.css' %}{% endblock %}
+
+{% block menu_button %}inverted{% endblock %}
+
+{% block navigation_links %}
+    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
+    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
+{% endblock %}
+
+{% block main_block %}
+    <h1>About Amplio</h1>
+    <h2>At IMG, feedback is taken positively. <span class="fa fa-comment"></span></h2>
+    <p>
+        The main goal of everyone at IMG is to learn something new everyday and make the lives of IITians in Roorkee
+        better in the process. We apply everything we've learnt and know in making new and useful apps that add a nifty
+        little tool that touches and enriches lives.
+    </p>
+    <p>
+        The only way we know our apps are still relevant and that our work is not misaligned with our own ideals is
+        through valuable input from the people to whom we cater with these applications. Thus Amplio was born out of a
+        necessity: a necessity to know what was lacking and what needed to be done to improve the technological state of
+        the institute from the only credible voice on the matter: the students themselves.
+    </p>
+    <p>
+        Amplio allows the users to post feedback on every aspect of the functioning of IMG. From bugs in software to
+        feature demands, all sorts of feedback posted on <strong>Amplio</strong> are reviewed by the right IMGians for
+        the job, the status of the fix is updated on the site and after it is fixed, the issue is closed off.
+    </p>
+    <p>
+        The most voted feedback and comments rise to the top, so that they can be brought before the people who made the
+        app or have a fair idea of the machinery inside. They make it a priority to fix crtical bugs and add features by
+        popular demand.
+    </p>
+    <p>
+    So go ahead. Speak your mind. Who knows, your idea combined with the power of IMG may revolutionize the way people live in IIT-R!
+    </p>
+{% endblock %}
