@@ -1,0 +1,50 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block navigation_links %}
+    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
+    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
+{% endblock %}
+
+{% block main_block %}
+    <h1>Get in touch</h1>
+    <h2>Are you an IITian from Roorkee? <span class="fa fa-map-marker"></span></h2>
+    <p>
+        You can walk into the IMG office in the Institute Computer Center at any time of the day and get all the help
+        you want from the extremely helpful people here. And by that, I mean <em>literally any</em> computer-related
+        help.
+    </p>
+    <h2>Send us an email <span class="fa fa-envelope"></span></h2>
+    <p>
+        For all you lazy people who can't drag yourself to the office, here's a form to fill up and send our way.
+    </p>
+    <form action="{% url 'amplio:contact' %}" method="post" class="ui form">
+        {% csrf_token %}
+        <div class="field">
+            <label>Name</label>
+            <div class="ui left icon input">
+                <input type="text" placeholder="Name" id="name" name="name">
+                <i class="icon fa fa-user"></i>
+            </div>
+        </div>
+        <div class="field">
+            <label>Email address</label>
+            <div class="ui left icon input">
+                <input type="text" placeholder="Email address" id="email" name="email">
+                <i class="icon fa fa-envelope"></i>
+            </div>
+        </div>
+        <div class="field">
+            <label>Message</label>
+            <textarea id="message" name="message"></textarea>
+        </div>
+        <button type="submit" class="ui animated basic button">
+            <div class="visible content"><span class="fa fa-paper-plane"></span></div>
+            <div class="hidden content">Submit</div>
+        </button>
+    </form>
+    <h2>Don't live in IIT Roorkee?</h2>
+    <p>This website is not for you, buddy. Move along!</p>
+{% endblock %}
