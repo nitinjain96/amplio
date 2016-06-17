@@ -1,0 +1,51 @@
+#page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+header {
+    border-bottom: 1px solid #dddddd;
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    align-items: center;
+    flex-grow: 0;
+}
+
+#title {
+    margin-left: 1em;
+    margin-right: 1em;
+    flex-grow: 0;
+}
+
+h1 {
+    font-size: 4em;
+}
+
+#menu {
+    margin-left: 1em;
+    margin-right: 1em;
+    flex-grow: 1;
+}
+
+#user {
+    margin-left: 1em;
+    margin-right: 1em;
+    flex-grow: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    border-top: 1px solid #dddddd;
+    padding: 1em;
+    flex-grow: 0;
+}
