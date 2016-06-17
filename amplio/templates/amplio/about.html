@@ -3,10 +3,6 @@
 
 {% block title_block %}Your opinion matters{% endblock %}
 
-{% block css_block %}{% static 'amplio/css/about.css' %}{% endblock %}
-
-{% block menu_button %}inverted{% endblock %}
-
 {% block navigation_links %}
     <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
     <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
