@@ -7,7 +7,7 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse("Work in progress")
+    return render(request, 'amplio/about.html')
 
 
 def browse(request):
