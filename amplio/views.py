@@ -6,15 +6,11 @@ def index(request):
     return render(request, 'amplio/index.html')
 
 
-def search(request):
+def about(request):
     return HttpResponse("Work in progress")
 
 
-def sign_up(request):
-    return HttpResponse("Work in progress")
-
-
-def log_in(request):
+def browse(request):
     return HttpResponse("Work in progress")
 
 
@@ -22,5 +18,21 @@ def compose(request):
     return HttpResponse("Work in progress")
 
 
-def browse(request):
+def contact(request):
+    return HttpResponse("Work in progress")
+
+
+def search(request):
+    return HttpResponse("Work in progress")
+
+
+def sign_in(request):
+    return HttpResponse("Work in progress")
+
+
+def sign_up(request):
+    return HttpResponse("Work in progress")
+
+
+def terms(request):
     return HttpResponse("Work in progress")
