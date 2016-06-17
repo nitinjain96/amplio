@@ -1,0 +1,29 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block css_block %}{% static 'amplio/css/index.css' %}{% endblock %}
+
+{% block menu_button %}inverted{% endblock %}
+
+{% block navigation_links %}
+    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
+    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
+{% endblock %}
+
+{% block main_block %}
+    <h1>Amplio</h1>
+    <h2>You have a voice. Make yourself heard. <span class="span fa fa-bullhorn"></span></h2>
+    <p>
+        Talk straight to the people here at IMG. Tell us what you want, we'll make sure you're heard.
+    </p>
+    <div id="call-to-action">
+        <button class="ui inverted button" onclick="goTo('{% url 'amplio:sign_up' %}')">
+            <span class="fa fa-user-plus"></span>&nbsp;Sign up
+        </button>
+        <button class="ui inverted button" onclick="goTo('{% url 'amplio:sign_in' %}')">
+            <span class="fa fa-sign-in"></span>&nbsp;Sign in
+        </button>
+    </div>
+{% endblock %}
