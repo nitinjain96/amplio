@@ -3,6 +3,14 @@
     color: white;
 }
 
+header {
+    border-bottom: 1px solid white;
+}
+
+footer {
+    border-top: 1px solid white;
+}
+
 #call-to-action button {
     margin-left: 1em;
     margin-right: 1em;
