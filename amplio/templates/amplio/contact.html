@@ -3,6 +3,8 @@
 
 {% block title_block %}Your opinion matters{% endblock %}
 
+{% block css_block %}{% static 'amplio/css/contact.css' %}{% endblock %}
+
 {% block navigation_links %}
     <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
     <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
@@ -20,31 +22,37 @@
     <p>
         For all you lazy people who can't drag yourself to the office, here's a form to fill up and send our way.
     </p>
-    <form action="{% url 'amplio:contact' %}" method="post" class="ui form">
-        {% csrf_token %}
-        <div class="field">
-            <label>Name</label>
-            <div class="ui left icon input">
-                <input type="text" placeholder="Name" id="name" name="name">
-                <i class="icon fa fa-user"></i>
-            </div>
+    <div class="ui grid" id="contact-form">
+        <div class="four wide column"></div>
+        <div class="eight wide column">
+            <form action="{% url 'amplio:contact' %}" method="post" class="ui form">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Name</label>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Name" id="name" name="name">
+                        <i class="icon fa fa-user"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Email address</label>
+                    <div class="ui left icon input">
+                        <input type="text" placeholder="Email address" id="email" name="email">
+                        <i class="icon fa fa-envelope"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Message</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                <button type="submit" class="ui animated basic button">
+                    <div class="visible content"><span class="fa fa-paper-plane"></span></div>
+                    <div class="hidden content">Submit</div>
+                </button>
+            </form>
         </div>
-        <div class="field">
-            <label>Email address</label>
-            <div class="ui left icon input">
-                <input type="text" placeholder="Email address" id="email" name="email">
-                <i class="icon fa fa-envelope"></i>
-            </div>
-        </div>
-        <div class="field">
-            <label>Message</label>
-            <textarea id="message" name="message"></textarea>
-        </div>
-        <button type="submit" class="ui animated basic button">
-            <div class="visible content"><span class="fa fa-paper-plane"></span></div>
-            <div class="hidden content">Submit</div>
-        </button>
-    </form>
+        <div class="four wide column"></div>
+    </div>
     <h2>Don't live in IIT Roorkee?</h2>
     <p>This website is not for you, buddy. Move along!</p>
 {% endblock %}
