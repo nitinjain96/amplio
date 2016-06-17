@@ -1,0 +1,9 @@
+#page {
+    background: radial-gradient(circle, #2980b9, #8e44ad);
+    color: white;
+}
+
+#call-to-action button {
+    margin-left: 1em;
+    margin-right: 1em;
+}
