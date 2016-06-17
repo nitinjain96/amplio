@@ -16,14 +16,72 @@
     <p>
         Talk straight to the people here at IMG. Tell us what you want, we'll make sure you're heard.
     </p>
-    <div id="call-to-action">
-        <button class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_up' %}')">
-            <div class="visible content"><span class="fa fa-user-plus"></span></div>
-            <div class="hidden content">Sign up</div>
-        </button>
-        <button class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_in' %}')">
-            <div class="visible content"><span class="fa fa-sign-in"></span></div>
-            <div class="hidden content">Sign in</div>
-        </button>
+    <div class="ui two column middle aligned very relaxed stackable grid" id="signin-or-signup">
+        <div class="column">
+            <h3>Sign in</h3>
+            <form action="{% url 'amplio:sign_in' %}" method="post" class="ui form" id="sign-in">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Email address</label>
+                    <div class="ui left icon input">
+                        <input type="email" placeholder="Email address" id="in-email" name="email" required>
+                        <i class="icon fa fa-envelope"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="ui left icon right action input">
+                        <input type="password" placeholder="Password" id="in-password" name="password" required>
+                        <i class="icon fa fa-key"></i>
+                        <button type="button" class="ui basic floating button"
+                                onclick="toggleVisibility(this, 'in-password')">
+                            <span class="fa fa-eye"></span>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="ui animated basic button">
+                    <div class="visible content"><span class="fa fa-sign-in"></span></div>
+                    <div class="hidden content">Sign in</div>
+                </button>
+            </form>
+        </div>
+        <div class="ui vertical divider">
+            OR
+        </div>
+        <div class="column">
+            <h3>Sign up</h3>
+            <form action="{% url 'amplio:sign_up' %}" method="post" class="ui form" id="sign-up">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Name</label>
+                    <div class="ui left icon input">
+                        <input type="email" placeholder="Name" id="up-name" name="name" required>
+                        <i class="icon fa fa-user"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Email address</label>
+                    <div class="ui left icon input">
+                        <input type="email" placeholder="Email address" id="up-email" name="email" required>
+                        <i class="icon fa fa-envelope"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="ui left icon right action input">
+                        <input type="password" placeholder="Password" id="up-password" name="password" required>
+                        <i class="icon fa fa-key"></i>
+                        <button type="button" class="ui basic floating button"
+                                onclick="toggleVisibility(this, 'up-password')">
+                            <span class="fa fa-eye"></span>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="ui animated basic button">
+                    <div class="visible content"><span class="fa fa-user-plus"></span></div>
+                    <div class="hidden content">Sign up</div>
+                </button>
+            </form>
+        </div>
     </div>
 {% endblock %}
