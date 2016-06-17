@@ -5,9 +5,12 @@ from amplio import views
 app_name = 'amplio'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^search/$', views.search, name='search'),
-    url(r'^sign-up/$', views.sign_up, name='sign_up'),
-    url(r'^log-in/$', views.log_in, name='log_in'),
-    url(r'^compose/$', views.compose, name='compose'),
+    url(r'^about/$', views.about, name='about'),
     url(r'^browse/$', views.browse, name='browse'),
+    url(r'^compose/$', views.compose, name='compose'),
+    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^search/$', views.search, name='search'),
+    url(r'^sign-in/$', views.sign_in, name='sign_in'),
+    url(r'^sign-up/$', views.sign_up, name='sign_up'),
+    url(r'^terms/$', views.terms, name='terms'),
 ]
