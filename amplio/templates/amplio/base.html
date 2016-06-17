@@ -41,6 +41,9 @@
         <div class="header">Navigation</div>
         <div class="menu">
             {% block navigation_links %}{% endblock %}
+            <a class="item" href="{% url 'amplio:about' %}">About</a>
+            <a class="item" href="{% url 'amplio:contact' %}">Contact</a>
+            <a class="item" href="{% url 'amplio:terms' %}">Terms</a>
         </div>
     </div>
     <!-- Additional sidebar content -->
