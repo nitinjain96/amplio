@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from amplio import emails
+from amplio import forms
 
 def index(request):
-    return render(request, 'amplio/index.html')
+    sign_up_form = forms.SignUpForm()
+    return render(request, 'amplio/index.html', {'sign_up_form': sign_up_form})
 
 
 def about(request):
