@@ -1,6 +1,23 @@
 from django import forms
 
 
+class SignInForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'id': 'in-email',
+            'placeholder': 'Email address',
+        }),
+        label='Email address'
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'id': 'in-password',
+            'placeholder': 'Password',
+        }),
+        label='Password'
+    )
+
+
 class SignUpForm(forms.Form):
     name = forms.CharField(
         widget=forms.TextInput(attrs={
@@ -24,4 +41,3 @@ class SignUpForm(forms.Form):
         }),
         label='Password'
     )
-
