@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from amplio import emails
 from amplio import forms
+
 
 def index(request):
     sign_in_form = forms.SignInForm()
