@@ -1,0 +1,68 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block navigation_links %}
+    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
+    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
+{% endblock %}
+
+{% block main_block %}
+    <h1>Sign up</h1>
+    <h2>Fill this form quickly. We're waiting!</h2>
+    <form action="{% url 'amplio:sign_up' %}" method="post"
+          class="ui form {% if state == 'success' %}success{% endif %}" name="sign-up">
+        {% csrf_token %}
+        <div class="field {% if form.name.errors %}error{% endif %}">
+            {{ form.name.label_tag }}
+            <div class="ui left icon input">
+                {{ form.name }}
+                <i class="icon fa fa-user"></i>
+            </div>
+        </div>
+        <div class="field {% if form.email.errors %}error{% endif %}">
+            {{ form.email.label_tag }}
+            <div class="ui left icon input">
+                {{ form.email }}
+                <i class="icon fa fa-envelope"></i>
+            </div>
+        </div>
+        <div class="field {% if form.password.errors %}error{% endif %}">
+            {{ form.password.label_tag }}
+            <div class="ui left icon right action input">
+                {{ form.password }}
+                <i class="icon fa fa-key"></i>
+                <button type="button" class="ui basic floating button" onclick="toggleVisibility(this, 'up-password')">
+                    <span class="fa fa-eye"></span>
+                </button>
+            </div>
+        </div>
+        <div class="ui animated basic button" onclick="document.forms['sign-up'].submit()">
+            <div class="visible content"><span class="fa fa-user-plus"></span></div>
+            <div class="hidden content">Sign up</div>
+        </div>
+        <div class="ui error message" id="error-message">
+            <ul class="list">
+                {% if form.name.errors %}
+                    <li>{{ form.name.errors|striptags }}</li>
+                {% endif %}
+                {% if form.email.errors %}
+                    <li>{{ form.email.errors|striptags }}</li>
+                {% endif %}
+                {% if form.password.errors %}
+                    <li>{{ form.password.errors|striptags }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="ui success message" id="success-message">
+            <div class="header">Great success!</div>
+            <p>You are now one of us. How cool is that?</p>
+        </div>
+    </form>
+    <script>
+        {% if state == 'failure' %}
+            $('#error-message').css('display', 'block');
+        {% endif %}
+    </script>
+{% endblock %}
