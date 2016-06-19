@@ -12,7 +12,7 @@
     <!-- Base styling for entire website -->
     <link rel="stylesheet" type="text/css" href="{% static 'amplio/css/base.css' %}">
     <!-- Page specific styling -->
-    <link rel="stylesheet" type="text/css" href="{% block css_block %}{% endblock %}">
+    {% block css_block %}{% endblock %}
 
     <!-- Icon font by Font Awesome -->
     <script src="https://use.fontawesome.com/7e3333d6a1.js"></script>
