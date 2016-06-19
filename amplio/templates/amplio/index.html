@@ -39,10 +39,11 @@
                         </button>
                     </div>
                 </div>
-                <div class="ui animated basic button" onclick="document.forms['sign-in'].submit();">
+                <div class="ui animated basic submit button" onclick="document.forms['sign-in'].submit();">
                     <div class="visible content"><span class="fa fa-sign-in"></span></div>
                     <div class="hidden content">Sign in</div>
                 </div>
+                <div class="ui error message" id="sign-in-errors"></div>
             </form>
         </div>
         <div class="ui vertical divider">
@@ -77,10 +78,11 @@
                         </button>
                     </div>
                 </div>
-                <div class="ui animated basic button" onclick="document.forms['sign-up'].submit();">
+                <div class="ui animated basic submit button" onclick="document.forms['sign-up'].submit();">
                     <div class="visible content"><span class="fa fa-user-plus"></span></div>
                     <div class="hidden content">Sign up</div>
                 </div>
+                <div class="ui error message" id="sign-up-errors"></div>
             </form>
         </div>
     </div>
