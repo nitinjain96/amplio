@@ -24,87 +24,14 @@
     <p>
         Talk straight to the people here at IMG. Tell us what you want, we'll make sure you're heard.
     </p>
-    <div class="ui two column middle aligned very relaxed stackable grid" id="signin-or-signup">
-        <div class="column">
-            <h3>Sign in</h3>
-            <form action="{% url 'amplio:sign_in' %}" method="post" class="ui form" id="sign-in" name="sign-in">
-                {% csrf_token %}
-                <div class="field">
-                    {{ sign_in_form.email.label_tag }}
-                    <div class="ui left icon input">
-                        {{ sign_in_form.email }}
-                        <i class="icon fa fa-envelope"></i>
-                    </div>
-                </div>
-                <div class="field">
-                    {{ sign_in_form.password.label_tag }}
-                    <div class="ui left icon right action input">
-                        {{ sign_in_form.password }}
-                        <i class="icon fa fa-key"></i>
-                        <button type="button" class="ui basic floating button"
-                                onclick="toggleVisibility(this, 'in-password')">
-                            <span class="fa fa-eye"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="ui animated basic submit button">
-                    <div class="visible content"><span class="fa fa-sign-in"></span></div>
-                    <div class="hidden content">Sign in</div>
-                </div>
-                <div class="ui error message" id="sign-in-errors">
-                    <ul class="list">
-                        <li>{{ sign_in_form.email.errors }}</li>
-                        <li>{{ sign_in_form.password.errors }}</li>
-                        <li>{{ sign_in_form.non_field_errors }}</li>
-                    </ul>
-                </div>
-            </form>
+    <div>
+        <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_in' %}')">
+            <div class="visible content"><span class="fa fa-sign-in"></span></div>
+            <div class="hidden content">Sign in</div>
         </div>
-        <div class="ui vertical divider">
-            OR
-        </div>
-        <div class="column">
-            <h3>Sign up</h3>
-            <form action="{% url 'amplio:sign_up' %}" method="post" class="ui form" id="sign-up" name="sign-up">
-                {% csrf_token %}
-                <div class="field {% if sign_up_form.name.errors %}error{% endif %}">
-                    {{ sign_up_form.name.label_tag }}
-                    <div class="ui left icon input">
-                        {{ sign_up_form.name }}
-                        <i class="icon fa fa-user"></i>
-                    </div>
-                </div>
-                <div class="field {% if sign_up_form.email.errors %}error{% endif %}">
-                    {{ sign_up_form.email.label_tag }}
-                    <div class="ui left icon input">
-                        {{ sign_up_form.email }}
-                        <i class="icon fa fa-envelope"></i>
-                    </div>
-                </div>
-                <div class="field {% if sign_up_form.password.errors %}error{% endif %}">
-                    {{ sign_up_form.password.label_tag }}
-                    <div class="ui left icon right action input">
-                        {{ sign_up_form.password }}
-                        <i class="icon fa fa-key"></i>
-                        <button type="button" class="ui basic floating button"
-                                onclick="toggleVisibility(this, 'up-password')">
-                            <span class="fa fa-eye"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="ui animated basic submit button">
-                    <div class="visible content"><span class="fa fa-user-plus"></span></div>
-                    <div class="hidden content">Sign up</div>
-                </div>
-                <div class="ui error message" id="sign-up-errors">
-                    <ul class="list">
-                        <li>{{ sign_up_form.name.errors|striptags }}</li>
-                        <li>{{ sign_up_form.email.errors|striptags }}</li>
-                        <li>{{ sign_up_form.password.errors|striptags }}</li>
-                    </ul>
-                </div>
-            </form>
+        <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_up' %}')">
+            <div class="visible content"><span class="fa fa-user-plus"></span></div>
+            <div class="hidden content">Sign up</div>
         </div>
     </div>
-    <script src="{% static 'amplio/js/formvalidation.js' %}"></script>
 {% endblock %}
