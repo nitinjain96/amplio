@@ -1,7 +1,9 @@
+from hashlib import md5
+
 from django import forms
 from django.core.exceptions import ValidationError
 
-from amplio import emails
+from amplio import emails, models
 
 
 class SignInForm(forms.Form):
@@ -10,15 +12,43 @@ class SignInForm(forms.Form):
             'id': 'in-email',
             'placeholder': 'Email address',
         }),
-        label='Email address'
+        label='Email address',
+        required=False
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'id': 'in-password',
             'placeholder': 'Password',
         }),
-        label='Password'
+        label='Password',
+        required=False
     )
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if len(email) == 0:
+            raise ValidationError("Please enter your email address", code='missing_email')
+        if not emails.is_valid(email):
+            raise ValidationError("Please enter a valid email address", code='invalid_email')
+        if emails.is_unused(email):
+            raise ValidationError("The email address is not associated with any account", code='unused_email')
+        return email
+
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if len(password) == 0:
+            raise ValidationError("Please enter your password", code='missing_password')
+        return password
+
+    def clean(self):
+        email = self.cleaned_data.get('email', '')
+        password = self.cleaned_data.get('password', '')
+        if email != '' and password != '':
+            password_hash = md5(password.encode('utf-8')).hexdigest()
+            user = models.User.objects.get(email=email)
+            if user.password_hash != password_hash:
+                raise ValidationError("Credentials do not match", code='credential_fail')
+        return self.cleaned_data
 
 
 class SignUpForm(forms.Form):
@@ -67,7 +97,7 @@ class SignUpForm(forms.Form):
     def clean_password(self):
         password = self.cleaned_data['password']
         if len(password) == 0:
-            raise ValidationError("Please choose a password")
+            raise ValidationError("Please choose a password", code='missing_password')
         if 0 < len(password) < 8:
-            raise ValidationError("Your password should be at least 8 characters long")
+            raise ValidationError("Your password should be at least 8 characters long", code='short_password')
         return password
