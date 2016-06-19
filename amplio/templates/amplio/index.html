@@ -19,7 +19,7 @@
     <div class="ui two column middle aligned very relaxed stackable grid" id="signin-or-signup">
         <div class="column">
             <h3>Sign in</h3>
-            <form action="{% url 'amplio:index' %}" method="post" class="ui form" id="sign-in" name="sign-in">
+            <form action="{% url 'amplio:sign_in' %}" method="post" class="ui form" id="sign-in" name="sign-in">
                 {% csrf_token %}
                 <div class="field">
                     {{ sign_in_form.email.label_tag }}
@@ -51,7 +51,7 @@
         </div>
         <div class="column">
             <h3>Sign up</h3>
-            <form action="{% url 'amplio:index' %}" method="post" class="ui form" id="sign-up" name="sign-up">
+            <form action="{% url 'amplio:sign_up' %}" method="post" class="ui form" id="sign-up" name="sign-up">
                 {% csrf_token %}
                 <div class="field">
                     {{ sign_up_form.name.label_tag }}
@@ -86,5 +86,5 @@
             </form>
         </div>
     </div>
-    <script src="{% static 'amplio/js/formvalidation.js' %}"></script>
+    <script src="{% static 'amplio/js/form-validation.js' %}"></script>
 {% endblock %}
