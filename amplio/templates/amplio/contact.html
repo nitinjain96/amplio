@@ -25,7 +25,7 @@
     <div class="ui grid" id="contact-form">
         <div class="four wide column"></div>
         <div class="eight wide column">
-            <form action="{% url 'amplio:contact' %}" method="post" class="ui form">
+            <form action="{% url 'amplio:contact' %}" method="post" class="ui form" id="contact" name="contact">
                 {% csrf_token %}
                 <div class="field">
                     <label>Name</label>
