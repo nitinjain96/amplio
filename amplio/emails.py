@@ -1,6 +1,6 @@
 from validate_email import validate_email
 
-from amplio.models import User
+from amplio import models
 
 
 def is_valid(email_address):
@@ -11,4 +11,4 @@ def is_valid(email_address):
 
 
 def is_unused(email_address):
-    return not User.objects.filter(email=email_address).exists()
+    return not models.User.objects.filter(email=email_address).exists()
