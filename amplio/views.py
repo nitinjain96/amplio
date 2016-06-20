@@ -116,4 +116,4 @@ def sign_out(request):
 
 
 def terms(request):
-    return HttpResponse("Work in progress")
+    return render(request, 'amplio/terms.html')
