@@ -1,6 +1,7 @@
 from hashlib import md5
 
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -30,7 +31,27 @@ def compose(request):
 
 
 def contact(request):
-    return render(request, 'amplio/contact.html')
+    if request.method == 'GET':
+        form = forms.ContactForm()
+        return render(request, 'amplio/contact.html', {
+            'state': 'blank',
+            'form': form
+        })
+    if request.method == 'POST':
+        form = forms.ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            message = form.cleaned_data.get('message')
+            send_content = message + '\n\n' + name + '\n' + email
+            thanks = 'Your message has been sent to the developers and designers at IMG. Expect to hear from them soon!'
+            send_mail('Contact form submission on Amplio', send_content, 'dhruv_b@live.com', ['dhruv_b@live.com'])
+            send_mail('Contact form submission on Amplio', thanks, 'dhruv_b@live.com', [email])
+        else:
+            return render(request, 'amplio/contact.html', {
+                'state': 'failure',
+                'form': form,
+            })
 
 
 def search(request):
