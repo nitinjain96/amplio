@@ -110,8 +110,7 @@ def sign_up(request):
 
 
 def sign_out(request):
-    for key in request.session.keys():
-        del request.session[key]
+    request.session.clear()
     request.session.flush()
     return redirect(reverse('amplio:index'))
 
