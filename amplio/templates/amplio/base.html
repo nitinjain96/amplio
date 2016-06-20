@@ -52,15 +52,15 @@
             {% endif %}
         </div>
     </div>
-    <div class="item">
-        <div class="header">Account</div>
-        <div class="menu">
-            {% if request.session.user_email %}
+    {% if request.session.user_email %}
+        <div class="item">
+            <div class="header">Account</div>
+            <div class="menu">
                 <a class="item" href="{% url 'amplio:profile' %}">Profile</a>
                 <a class="item" href="{% url 'amplio:sign_out' %}">Sign Out</a>
-            {% endif %}
+            </div>
         </div>
-    </div>
+    {% endif %}
     <div class="item">
         <div class="header">Site links</div>
         <div class="menu">
