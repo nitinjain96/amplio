@@ -12,22 +12,30 @@
     {% if request.session.user_email %}
         <div>
             <div class="ui animated basic button" onclick="goTo('{% url 'amplio:compose' %}')">
-                <div class="visible content"><span class="fa fa-pencil"></span></div>
+                <div class="visible content">
+                    &nbsp;&nbsp;&nbsp;<span class="fa fa-pencil">&nbsp;&nbsp;&nbsp;</span>
+                </div>
                 <div class="hidden content">Compose</div>
             </div>
             <div class="ui animated basic button" onclick="goTo('{% url 'amplio:browse' %}')">
-                <div class="visible content"><span class="fa fa-th-list"></span></div>
+                <div class="visible content">
+                    &nbsp;&nbsp;&nbsp;<span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;
+                </div>
                 <div class="hidden content">Browse</div>
             </div>
         </div>
     {% else %}
         <div>
             <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_in' %}')">
-                <div class="visible content"><span class="fa fa-sign-in"></span></div>
+                <div class="visible content">
+                    &nbsp;&nbsp;&nbsp;<span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;
+                </div>
                 <div class="hidden content">Sign in</div>
             </div>
             <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_up' %}')">
-                <div class="visible content"><span class="fa fa-user-plus"></span></div>
+                <div class="visible content">
+                    &nbsp;&nbsp;&nbsp;<span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;
+                </div>
                 <div class="hidden content">Sign up</div>
             </div>
         </div>
