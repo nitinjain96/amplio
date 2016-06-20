@@ -53,6 +53,10 @@ def contact(request):
             })
 
 
+def profile(request):
+    return HttpResponse("Work in progress")
+
+
 def search(request):
     return HttpResponse("Work in progress")
 
@@ -103,6 +107,13 @@ def sign_up(request):
                 'state': 'failure',
                 'form': form,
             })
+
+
+def sign_out(request):
+    for key in request.session.keys():
+        del request.session[key]
+    request.session.flush()
+    return redirect(reverse('amplio:index'))
 
 
 def terms(request):
