@@ -27,17 +27,17 @@ class SignInForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data['email']
         if len(email) == 0:
-            raise ValidationError("Please enter your email address", code='missing_email')
+            raise ValidationError('Please enter your email address', code='missing_email')
         if not emails.is_valid(email):
-            raise ValidationError("Please enter a valid email address", code='invalid_email')
+            raise ValidationError('Please enter a valid email address', code='invalid_email')
         if emails.is_unused(email):
-            raise ValidationError("The email address is not associated with any account", code='unused_email')
+            raise ValidationError('The email address is not associated with any account', code='unused_email')
         return email
 
     def clean_password(self):
         password = self.cleaned_data['password']
         if len(password) == 0:
-            raise ValidationError("Please enter your password", code='missing_password')
+            raise ValidationError('Please enter your password', code='missing_password')
         return password
 
     def clean(self):
@@ -47,7 +47,7 @@ class SignInForm(forms.Form):
             password_hash = md5(password.encode('utf-8')).hexdigest()
             user = models.User.objects.get(email=email)
             if user.password_hash != password_hash:
-                raise ValidationError("Credentials do not match", code='credential_fail')
+                raise ValidationError('Credentials do not match', code='credential_fail')
         return self.cleaned_data
 
 
@@ -81,25 +81,25 @@ class SignUpForm(forms.Form):
     def clean_name(self):
         name = self.cleaned_data['name']
         if len(name) == 0:
-            raise ValidationError("Please enter your name", code='missing_name')
+            raise ValidationError('Please enter your name', code='missing_name')
         return name
 
     def clean_email(self):
         email = self.cleaned_data['email']
         if len(email) == 0:
-            raise ValidationError("Please enter your email address", code='missing_email')
+            raise ValidationError('Please enter your email address', code='missing_email')
         if not emails.is_valid(email):
-            raise ValidationError("Please enter a valid email address", code='invalid_email')
+            raise ValidationError('Please enter a valid email address', code='invalid_email')
         if not emails.is_unused(email):
-            raise ValidationError("The email address is already associated with an account", code='used_email')
+            raise ValidationError('The email address is already associated with an account', code='used_email')
         return email
 
     def clean_password(self):
         password = self.cleaned_data['password']
         if len(password) == 0:
-            raise ValidationError("Please choose a password", code='missing_password')
+            raise ValidationError('Please choose a password', code='missing_password')
         if 0 < len(password) < 8:
-            raise ValidationError("Your password should be at least 8 characters long", code='short_password')
+            raise ValidationError('Your password should be at least 8 characters long', code='short_password')
         return password
 
 
@@ -132,21 +132,21 @@ class ContactForm(forms.Form):
     def clean_name(self):
         name = self.cleaned_data['name']
         if len(name) == 0:
-            raise ValidationError("Please enter your name", code='missing_name')
+            raise ValidationError('Please enter your name', code='missing_name')
         return name
 
     def clean_email(self):
         email = self.cleaned_data['email']
         if len(email) == 0:
-            raise ValidationError("Please enter your email address", code='missing_email')
+            raise ValidationError('Please enter your email address', code='missing_email')
         if not emails.is_valid(email):
-            raise ValidationError("Please enter a valid email address", code='invalid_email')
+            raise ValidationError('Please enter a valid email address', code='invalid_email')
         if not emails.is_unused(email):
-            raise ValidationError("The email address is already associated with an account", code='used_email')
+            raise ValidationError('The email address is already associated with an account', code='used_email')
         return email
 
     def clean_message(self):
         message = self.cleaned_data['message']
         if len(message) == 0:
-            raise ValidationError("Message cannot be empty", code='missing_message')
+            raise ValidationError('Message cannot be empty', code='missing_message')
         return message
