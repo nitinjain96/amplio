@@ -11,7 +11,6 @@ from amplio import models, forms
 def index(request):
     sign_in_form = forms.SignInForm()
     sign_up_form = forms.SignUpForm()
-    print(request.session.get('user_email', '~'))
     return render(request, 'amplio/index.html', {
         'sign_in_form': sign_in_form,
         'sign_up_form': sign_up_form,
