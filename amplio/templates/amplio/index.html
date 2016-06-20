@@ -3,21 +3,6 @@
 
 {% block title_block %}Your opinion matters{% endblock %}
 
-{% block css_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'amplio/css/index.css' %}">
-    {% if sign_up_form.name.errors or sign_up_form.email.errors or sign_up_form.password.errors %}
-        <link rel="stylesheet" href="{% static 'amplio/css/sign-up-errors.css' %}">
-    {% endif %}
-    {% if sign_in_form.non_field_errors or sign_in_form.email.errors or sign_in_form.password.errors %}
-        <link rel="stylesheet" href="{% static 'amplio/css/sign-in-errors.css' %}">
-    {% endif %}
-{% endblock %}
-
-{% block navigation_links %}
-    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
-    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
-{% endblock %}
-
 {% block main_block %}
     <h1>Hello World!</h1>
     <h2>You have a voice. Make yourself heard. <span class="span fa fa-bullhorn"></span></h2>

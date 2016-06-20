@@ -3,14 +3,6 @@
 
 {% block title_block %}Your opinion matters{% endblock %}
 
-{% block css_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'amplio/css/contact.css' %}">{% endblock %}
-
-{% block navigation_links %}
-    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
-    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
-{% endblock %}
-
 {% block main_block %}
     <h1>Get in touch</h1>
     <h2>Send us an email and wait for our reply</h2>
