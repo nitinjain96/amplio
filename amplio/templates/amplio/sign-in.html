@@ -1,0 +1,57 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block navigation_links %}
+    <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
+    <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
+{% endblock %}
+
+{% block main_block %}
+    <h1>Sign in</h1>
+    <h2>Welcome back! We hope you have great stuff to share</h2>
+    <form action="{% url 'amplio:sign_in' %}" method="post"
+          class="ui form {% if state == 'success' %}success{% endif %}" name="sign-in">
+        {% csrf_token %}
+        <div class="field {% if form.email.errors %}error{% endif %}">
+            {{ form.email.label_tag }}
+            <div class="ui left icon input">
+                {{ form.email }}
+                <i class="icon fa fa-envelope"></i>
+            </div>
+        </div>
+        <div class="field {% if form.password.errors %}error{% endif %}">
+            {{ form.password.label_tag }}
+            <div class="ui left icon right action input">
+                {{ form.password }}
+                <i class="icon fa fa-key"></i>
+                <button type="button" class="ui basic floating button" onclick="toggleVisibility(this, 'up-password')">
+                    <span class="fa fa-eye"></span>
+                </button>
+            </div>
+        </div>
+        <div class="ui animated basic button" onclick="document.forms['sign-in'].submit()">
+            <div class="visible content"><span class="fa fa-sign-in"></span></div>
+            <div class="hidden content">Sign in</div>
+        </div>
+        <div class="ui error message" id="error-message">
+            <ul class="list">
+                {% if form.non_field_errors %}
+                    <li>{{ form.non_field_errors|striptags }}</li>
+                {% endif %}
+                {% if form.email.errors %}
+                    <li>{{ form.email.errors|striptags }}</li>
+                {% endif %}
+                {% if form.password.errors %}
+                    <li>{{ form.password.errors|striptags }}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </form>
+    <script>
+        {% if state == 'failure' %}
+            $('#error-message').css('display', 'block');
+        {% endif %}
+    </script>
+{% endblock %}
