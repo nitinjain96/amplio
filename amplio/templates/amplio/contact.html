@@ -3,7 +3,8 @@
 
 {% block title_block %}Your opinion matters{% endblock %}
 
-{% block css_block %}<link rel="stylesheet" type="text/css" href="{% static 'amplio/css/contact.css' %}">{% endblock %}
+{% block css_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'amplio/css/contact.css' %}">{% endblock %}
 
 {% block navigation_links %}
     <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
@@ -12,47 +13,51 @@
 
 {% block main_block %}
     <h1>Get in touch</h1>
-    <h2>Are you an IITian from Roorkee? <span class="fa fa-map-marker"></span></h2>
-    <p>
-        You can walk into the IMG office in the Institute Computer Center at any time of the day and get all the help
-        you want from the extremely helpful people here. And by that, I mean <em>literally any</em> computer-related
-        help.
-    </p>
-    <h2>Send us an email <span class="fa fa-envelope"></span></h2>
-    <p>
-        For all you lazy people who can't drag yourself to the office, here's a form to fill up and send our way.
-    </p>
-    <div class="ui grid" id="contact-form">
-        <div class="four wide column"></div>
-        <div class="eight wide column">
-            <form action="{% url 'amplio:contact' %}" method="post" class="ui form" id="contact" name="contact">
-                {% csrf_token %}
-                <div class="field">
-                    <label>Name</label>
-                    <div class="ui left icon input">
-                        <input type="text" placeholder="Name" id="name" name="name">
-                        <i class="icon fa fa-user"></i>
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Email address</label>
-                    <div class="ui left icon input">
-                        <input type="text" placeholder="Email address" id="email" name="email">
-                        <i class="icon fa fa-envelope"></i>
-                    </div>
-                </div>
-                <div class="field">
-                    <label>Message</label>
-                    <textarea id="message" name="message"></textarea>
-                </div>
-                <button type="submit" class="ui animated basic button">
-                    <div class="visible content"><span class="fa fa-paper-plane"></span></div>
-                    <div class="hidden content">Submit</div>
-                </button>
-            </form>
+    <h2>Send us an email and wait for our reply</h2>
+    <form action="{% url 'amplio:contact' %}" method="post"
+          class="ui form {% if state == 'success' %}success{% endif %}" name="contact">
+        {% csrf_token %}
+        <div class="field {% if form.email.errors %}error{% endif %}">
+            {{ form.name.label_tag }}
+            <div class="ui left icon input">
+                {{ form.name }}
+                <i class="icon fa fa-user"></i>
+            </div>
         </div>
-        <div class="four wide column"></div>
-    </div>
+        <div class="field {% if form.email.errors %}error{% endif %}">
+            {{ form.email.label_tag }}
+            <div class="ui left icon input">
+                {{ form.email }}
+                <i class="icon fa fa-envelope"></i>
+            </div>
+        </div>
+        <div class="field {% if form.email.errors %}error{% endif %}">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+        </div>
+        <div type="submit" class="ui animated basic button" onclick="document.forms['contact'].submit()">
+            <div class="visible content"><span class="fa fa-envelope"></span></div>
+            <div class="hidden content">Submit</div>
+        </div>
+        <div class="ui error message" id="error-message">
+            <ul class="list">
+                {% if form.name.errors %}
+                    <li>{{ form.name.errors|striptags }}</li>
+                {% endif %}
+                {% if form.email.errors %}
+                    <li>{{ form.email.errors|striptags }}</li>
+                {% endif %}
+                {% if form.message.errors %}
+                    <li>{{ form.message.errors|striptags }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="ui success message" id="success-message">
+            <div class="header">Great success!</div>
+            <p>Your email is on its way to the coolest guys on campus.</p>
+        </div>
+    </form>
     <h2>Don't live in IIT Roorkee?</h2>
-    <p>This website is not for you, buddy. Move along!</p>
+    <p>This website is not for you, buddy. Move along! If you feel inspired, learn <a
+            href="http://www.djangoproject.com/">Django</a> and make an app like this for your own college.</p>
 {% endblock %}
