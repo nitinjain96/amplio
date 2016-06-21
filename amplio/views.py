@@ -26,7 +26,44 @@ def browse(request):
 
 
 def compose(request):
-    return HttpResponse("Work in progress")
+    if request.method == 'GET':
+        form = forms.FeedbackForm()
+        return render(request, 'amplio/compose.html', {
+            'state': 'blank',
+            'form': form
+        })
+    if request.method == 'POST':
+        user_email = request.session.get('user_email', '')
+        if len(user_email) == 0:
+            return redirect(reverse('amplio:log_in'))
+        form = forms.FeedbackForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_form = forms.FeedbackForm()
+            title = form.cleaned_data.get('title')
+            description = form.cleaned_data.get('description')
+            type = form.cleaned_data.get('type')
+            to = form.cleaned_data.get('to')
+            category = form.cleaned_data.get('category')
+            image = form.cleaned_data.get('image')
+            user = models.User.objects.get(email=user_email)
+            feedback = models.Feedback(
+                title=title,
+                description=description,
+                type=type, to=to,
+                category=category,
+                image=image,
+                by=user
+            )
+            feedback.save()
+            return render(request, 'amplio/compose.html', {
+                'state': 'success',
+                'form': new_form,
+            })
+        else:
+            return render(request, 'amplio/compose.html', {
+                'state': 'failure',
+                'form': form,
+            })
 
 
 def contact(request):
