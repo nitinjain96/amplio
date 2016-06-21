@@ -1,15 +1,15 @@
 USER_POST_CHOICES = (
-    (1, 'Student'),
-    (2, 'IMG developer'),
-    (3, 'IMG designer'),
-    (4, 'IIT official'),
+    (0, 'Student'),
+    (1, 'IMG developer'),
+    (2, 'IMG designer'),
+    (3, 'IIT official'),
 )
 
 FEEDBACK_TYPE_CHOICES = (
-    (1, 'Suggestions for improving existing apps'),
-    (2, 'Bugs that need to be eliminated rapidly'),
-    (3, 'Glitches that need to be eliminated casually'),
-    (4, 'Ideas for building new apps'),
+    (0, 'Suggestions for improving existing apps'),
+    (1, 'Bugs that need to be eliminated rapidly'),
+    (2, 'Glitches that need to be eliminated casually'),
+    (3, 'Ideas for building new apps'),
 )
 
 FEEDBACK_TO_CHOICES = (
@@ -47,14 +47,14 @@ FEEDBACK_CATEGORY_CHOICES = (
 )
 
 FEEDBACK_STATUS_CHOICES = {
-    {1: 'Reported'},
-    {2: 'Under consideration'},
-    {3: 'Under construction'},
-    {4: 'Undergoing tests'},
-    {5: 'Completed'},
+    {0: 'Reported'},
+    {1: 'Under consideration'},
+    {2: 'Under construction'},
+    {3: 'Undergoing tests'},
+    {4: 'Completed'},
 }
 
 COMMENT_UPON_CHOICES = (
-    (1, 'Comment on feedback'),
-    (2, 'Comment on comment'),
+    (0, 'Comment on feedback'),
+    (1, 'Comment on comment'),
 )
