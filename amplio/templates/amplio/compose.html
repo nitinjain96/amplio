@@ -1,0 +1,83 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block main_block %}
+    <h1>Compose feedback</h1>
+    <h2>We're all ears. Speak your mind.</h2>
+    <form action="{% url 'amplio:compose' %}" method="post"
+          class="ui form {% if state == 'success' %}success{% endif %}" enctype="multipart/form-data" name="sign-in">
+        {% csrf_token %}
+        <div class="field {% if form.title.errors %}error{% endif %}">
+            {{ form.title.label_tag }}
+            <div class="ui left icon input">
+                {{ form.title }}
+                <i class="icon fa fa-header"></i>
+            </div>
+        </div>
+        <div class="field {% if form.description.errors %}error{% endif %}">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div class="field {% if form.type.errors %}error{% endif %}">
+            {{ form.type.label_tag }}
+            {{ form.type }}
+        </div>
+        <div class="field {% if form.to.errors %}error{% endif %}">
+            {{ form.to.label_tag }}
+            {{ form.to }}
+        </div>
+        <div class="field {% if form.category.errors %}error{% endif %}">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+        <div class="field {% if form.image.errors %}error{% endif %}">
+            {{ form.image.label_tag }}
+            <div class="ui left icon input">
+                {{ form.image }}
+                <i class="icon fa fa-file-picture-o"></i>
+            </div>
+        </div>
+        <div class="ui animated basic button" onclick="document.forms['sign-in'].submit()">
+            <div class="visible content">
+                &nbsp;&nbsp;&nbsp;<span class="fa fa-bullhorn"></span>&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="hidden content">Amplio</div>
+        </div>
+        <div class="ui error message" id="error-message">
+            <ul class="list">
+                {% if form.title.errors %}
+                    <li>{{ form.title.errors|striptags }}</li>
+                {% endif %}
+                {% if form.description.errors %}
+                    <li>{{ form.description.errors|striptags }}</li>
+                {% endif %}
+                {% if form.type.errors %}
+                    <li>{{ form.type.errors|striptags }}</li>
+                {% endif %}
+                {% if form.to.errors %}
+                    <li>{{ form.to.errors|striptags }}</li>
+                {% endif %}
+                {% if form.category.errors %}
+                    <li>{{ form.category.errors|striptags }}</li>
+                {% endif %}
+                {% if form.image.errors %}
+                    <li>{{ form.image.errors|striptags }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="ui success message" id="success-message">
+            <div class="header">Great success!</div>
+            <p>
+                Thanks for your feedback. You may or may not get a personal response but rest assured, we consider every
+                single piece of feedback.
+            </p>
+        </div>
+    </form>
+    <script>
+        {% if state == 'failure' %}
+            $('#error-message').css('display', 'block');
+        {% endif %}
+    </script>
+{% endblock %}
