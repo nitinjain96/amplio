@@ -46,6 +46,14 @@ FEEDBACK_CATEGORY_CHOICES = (
     (24, 'Status'),
 )
 
+FEEDBACK_STATUS_CHOICES = {
+    {1: 'Reported'},
+    {2: 'Under consideration'},
+    {3: 'Under construction'},
+    {4: 'Undergoing tests'},
+    {5: 'Completed'},
+}
+
 COMMENT_UPON_CHOICES = (
     (1, 'Comment on feedback'),
     (2, 'Comment on comment'),
