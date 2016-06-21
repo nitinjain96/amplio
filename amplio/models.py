@@ -29,6 +29,7 @@ class Feedback(models.Model):
 
     time = models.DateTimeField(default=datetime.now)
     votes = models.IntegerField(default=0)
+    status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES)
 
     by = models.ForeignKey(User, on_delete=models.CASCADE)
 
