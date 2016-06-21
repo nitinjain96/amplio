@@ -47,11 +47,11 @@ FEEDBACK_CATEGORY_CHOICES = (
 )
 
 FEEDBACK_STATUS_CHOICES = {
-    {0: 'Reported'},
-    {1: 'Under consideration'},
-    {2: 'Under construction'},
-    {3: 'Undergoing tests'},
-    {4: 'Completed'},
+    {0, 'Reported'},
+    {1, 'Under consideration'},
+    {2, 'Under construction'},
+    {3, 'Undergoing tests'},
+    {4, 'Completed'},
 }
 
 COMMENT_UPON_CHOICES = (
