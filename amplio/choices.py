@@ -6,10 +6,11 @@ USER_POST_CHOICES = (
 )
 
 FEEDBACK_TYPE_CHOICES = (
-    (0, 'Suggestions for improving existing apps'),
-    (1, 'Bugs that need to be eliminated rapidly'),
-    (2, 'Glitches that need to be eliminated casually'),
-    (3, 'Ideas for building new apps'),
+    (0, 'Not really sure'),
+    (1, 'Suggestions for improving existing apps'),
+    (2, 'Bugs that need to be eliminated rapidly'),
+    (3, 'Glitches that need to be eliminated casually'),
+    (4, 'Ideas for building new apps'),
 )
 
 FEEDBACK_TO_CHOICES = (
