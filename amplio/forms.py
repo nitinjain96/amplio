@@ -3,7 +3,7 @@ from hashlib import md5
 from django import forms
 from django.core.exceptions import ValidationError
 
-from amplio import emails, models
+from amplio import emails, models, choices
 
 
 class SignInForm(forms.Form):
@@ -150,3 +150,64 @@ class ContactForm(forms.Form):
         if len(message) == 0:
             raise ValidationError('Message cannot be empty', code='missing_message')
         return message
+
+
+class FeedbackForm(forms.Form):
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'id': 'feedback-title',
+            'placeholder': 'Title'
+        }),
+        label='Title',
+        required=False
+    )
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'id': 'feedback-description'
+        }),
+        label='Description',
+        required=False
+    )
+    type = forms.ChoiceField(
+        widget=forms.Select(attrs={
+            'id': 'feedback-type'
+        }),
+        label='Type',
+        choices=choices.FEEDBACK_TYPE_CHOICES,
+        required=False
+    )
+    to = forms.ChoiceField(
+        widget=forms.Select(attrs={
+            'id': 'feedback-to'
+        }),
+        label='To',
+        choices=choices.FEEDBACK_TO_CHOICES,
+        required=False
+    )
+    category = forms.ChoiceField(
+        widget=forms.Select(attrs={
+            'id': 'feedback-category'
+        }),
+        label='Category',
+        choices=choices.FEEDBACK_CATEGORY_CHOICES,
+        required=False
+    )
+    image = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={
+            'id': 'feedback-image'
+        }),
+        label='Image',
+        required=False
+    )
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if len(title) == 0:
+            raise ValidationError('Please enter a title', code='missing_title')
+        return title
+
+    def clean_description(self):
+        description = self.cleaned_data['description']
+        if len(description) == 0:
+            raise ValidationError('Please enter a description', code='missing_description')
+        return description
