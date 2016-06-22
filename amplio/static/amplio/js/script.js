@@ -20,3 +20,7 @@ function toggleVisibility(button, field_identifier) {
 function initializeDropdowns() {
     $('.ui.dropdown').dropdown();
 }
+
+function initializePopups() {
+    $('label').popup({inline: true});
+}
