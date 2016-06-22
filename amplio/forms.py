@@ -170,7 +170,8 @@ class FeedbackForm(forms.Form):
     )
     type = forms.ChoiceField(
         widget=forms.Select(attrs={
-            'id': 'feedback-type'
+            'id': 'feedback-type',
+            'class': 'ui dropdown',
         }),
         label='Type',
         choices=choices.FEEDBACK_TYPE_CHOICES,
@@ -178,7 +179,8 @@ class FeedbackForm(forms.Form):
     )
     to = forms.ChoiceField(
         widget=forms.Select(attrs={
-            'id': 'feedback-to'
+            'id': 'feedback-to',
+            'class': 'ui dropdown',
         }),
         label='To',
         choices=choices.FEEDBACK_TO_CHOICES,
@@ -186,7 +188,8 @@ class FeedbackForm(forms.Form):
     )
     category = forms.ChoiceField(
         widget=forms.Select(attrs={
-            'id': 'feedback-category'
+            'id': 'feedback-category',
+            'class': 'ui dropdown',
         }),
         label='Category',
         choices=choices.FEEDBACK_CATEGORY_CHOICES,
@@ -194,7 +197,7 @@ class FeedbackForm(forms.Form):
     )
     image = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={
-            'id': 'feedback-image'
+            'id': 'feedback-image',
         }),
         label='Image',
         required=False
