@@ -16,3 +16,7 @@ function toggleVisibility(button, field_identifier) {
         button.innerHTML = '<span class="fa fa-eye"></span>';
     }
 }
+
+function initializeDropdowns() {
+    $('.ui.dropdown').dropdown();
+}
