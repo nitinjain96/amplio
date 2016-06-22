@@ -1,61 +1,64 @@
+from amplio import choice_constants
+
 USER_POST_CHOICES = (
-    (0, 'Student'),
-    (1, 'IMG developer'),
-    (2, 'IMG designer'),
-    (3, 'IIT official'),
+    (choice_constants.STUDENT, 'Student'),
+    (choice_constants.IMG_DEVELOPER, 'IMG developer'),
+    (choice_constants.IMG_DESIGNER, 'IMG designer'),
+    (choice_constants.IIT_OFFICIAL, 'IIT official'),
 )
 
 FEEDBACK_TYPE_CHOICES = (
-    (0, 'Not really sure'),
-    (1, 'Suggestions for improving existing apps'),
-    (2, 'Bugs that need to be eliminated rapidly'),
-    (3, 'Glitches that need to be eliminated casually'),
-    (4, 'Ideas for building new apps'),
+    (choice_constants.NOT_SURE, 'Not really sure'),
+    (choice_constants.SUGGESTIONS, 'Suggestions for improving existing apps'),
+    (choice_constants.BUGS, 'Bugs that need to be eliminated rapidly'),
+    (choice_constants.GLITCHES, 'Glitches that need to be eliminated casually'),
+    (choice_constants.IDEAS, 'Ideas for building new apps'),
 )
 
 FEEDBACK_TO_CHOICES = (
-    (0, 'All concerned'),
-    (1, 'Developers only'),
-    (2, 'Designers only'),
+    (choice_constants.IMG_DEVELOPER, 'IMG developers'),
+    (choice_constants.IMG_DESIGNER, 'IMG designers'),
+    (choice_constants.IMG, 'IMG developers and designers'),
+    (choice_constants.IIT_OFFICIAL, 'IIT officials')
 )
 
 FEEDBACK_CATEGORY_CHOICES = (
-    (0, 'No specific category or miscellaneous'),
-    (1, 'IIT Roorkee website'),
-    (2, 'IMG website'),
-    (3, 'New entrants'),
-    (4, 'Channel-i'),
-    (5, 'Notice board'),
-    (6, 'Lectures and tutorials'),
-    (7, 'Lost and found'),
-    (8, 'Buy and sell'),
-    (9, 'People search'),
-    (10, 'Jukebox'),
-    (11, 'Kriti'),
-    (12, 'Yaadein'),
-    (13, 'Projects portal'),
-    (14, 'Internship portal'),
-    (15, 'Placement portal'),
-    (16, 'Student home-page'),
-    (17, 'DC++ hub'),
-    (18, 'Bunk-o-meter Android app'),
-    (19, 'Notice board Android app'),
-    (20, 'Forum'),
-    (21, 'FAQ'),
-    (22, 'Media management system'),
-    (23, 'Forminator'),
-    (24, 'Status'),
+    (choice_constants.NO_SPECIFIC_CATEGORY, 'No specific category or miscellaneous'),
+    (choice_constants.IIT_ROORKEE_WEBSITE, 'IIT Roorkee website'),
+    (choice_constants.IMG_WEBSITE, 'IMG website'),
+    (choice_constants.NEW_ENTRANTS, 'New entrants'),
+    (choice_constants.CHANNEL_I, 'Channel-i'),
+    (choice_constants.NOTICE_BOARD, 'Notice board'),
+    (choice_constants.LECTURES_AND_TUTORIALS, 'Lectures and tutorials'),
+    (choice_constants.LOST_AND_FOUND, 'Lost and found'),
+    (choice_constants.BUY_AND_SELL, 'Buy and sell'),
+    (choice_constants.PEOPLE_SEARCH, 'People search'),
+    (choice_constants.JUKEBOX, 'Jukebox'),
+    (choice_constants.KRITI, 'Kriti'),
+    (choice_constants.YAADEIN, 'Yaadein'),
+    (choice_constants.PROJECTS_PORTAL, 'Projects portal'),
+    (choice_constants.INTERNSHIP_PORTAL, 'Internship portal'),
+    (choice_constants.PLACEMENTS_PORTAL, 'Placement portal'),
+    (choice_constants.STUDENT_HOMEPAGE, 'Student homepage'),
+    (choice_constants.DC_HUB, 'DC++ hub'),
+    (choice_constants.BUNK_O_METER, 'Bunk-o-meter Android app'),
+    (choice_constants.NOTICE_BOARD_APP, 'Notice board Android app'),
+    (choice_constants.FORUM, 'Forum'),
+    (choice_constants.FAQ, 'FAQ'),
+    (choice_constants.MEDIA_MANAGEMENT_SYSTEM, 'Media management system'),
+    (choice_constants.FORMINATOR, 'Forminator'),
+    (choice_constants.STATUS, 'Status'),
 )
 
 FEEDBACK_STATUS_CHOICES = (
-    (0, 'Reported'),
-    (1, 'Under consideration'),
-    (2, 'Under construction'),
-    (3, 'Undergoing tests'),
-    (4, 'Completed'),
+    (choice_constants.REPORTED, 'Reported'),
+    (choice_constants.UNDER_CONSIDERATION, 'Under consideration'),
+    (choice_constants.UNDER_CONSTRUCTION, 'Under construction'),
+    (choice_constants.UNDER_TESTING, 'Under testing'),
+    (choice_constants.COMPLETED, 'Completed'),
 )
 
 COMMENT_UPON_CHOICES = (
-    (0, 'Comment on feedback'),
-    (1, 'Comment on comment'),
+    (choice_constants.COMMENT_ON_FEEDBACK, 'Comment on feedback'),
+    (choice_constants.COMMENT_ON_COMMENT, 'Comment on comment'),
 )
