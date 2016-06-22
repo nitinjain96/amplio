@@ -11,6 +11,9 @@
         {% csrf_token %}
         <div class="field {% if form.name.errors %}error{% endif %}">
             {{ form.name.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Enter your name (this is not your username)</p>
+            </div>
             <div class="ui left icon input">
                 {{ form.name }}
                 <i class="icon fa fa-user"></i>
@@ -18,6 +21,9 @@
         </div>
         <div class="field {% if form.email.errors %}error{% endif %}">
             {{ form.email.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Enter your email address (this is your username)</p>
+            </div>
             <div class="ui left icon input">
                 {{ form.email }}
                 <i class="icon fa fa-envelope"></i>
@@ -25,6 +31,9 @@
         </div>
         <div class="field {% if form.password.errors %}error{% endif %}">
             {{ form.password.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Enter a strong yet memorable password</p>
+            </div>
             <div class="ui left icon right action input">
                 {{ form.password }}
                 <i class="icon fa fa-key"></i>
@@ -61,5 +70,6 @@
         {% if state == 'failure' %}
             $('#error-message').css('display', 'block');
         {% endif %}
+        initializePopups();
     </script>
 {% endblock %}
