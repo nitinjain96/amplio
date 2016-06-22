@@ -11,6 +11,9 @@
         {% csrf_token %}
         <div class="field {% if form.title.errors %}error{% endif %}">
             {{ form.title.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Specify a short but description title for the feedback</p>
+            </div>
             <div class="ui left icon input">
                 {{ form.title }}
                 <i class="icon fa fa-header"></i>
@@ -18,22 +21,37 @@
         </div>
         <div class="field {% if form.description.errors %}error{% endif %}">
             {{ form.description.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Describe the feedback in full detail</p>
+            </div>
             {{ form.description }}
         </div>
         <div class="field {% if form.type.errors %}error{% endif %}">
             {{ form.type.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>The type of feedback indicates the gravity of the situation</p>
+            </div>
             {{ form.type }}
         </div>
         <div class="field {% if form.to.errors %}error{% endif %}">
             {{ form.to.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Is this feedback related to the programming or the design aspect of the app?</p>
+            </div>
             {{ form.to }}
         </div>
         <div class="field {% if form.category.errors %}error{% endif %}">
             {{ form.category.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>Select the app or website this feedback pertains to</p>
+            </div>
             {{ form.category }}
         </div>
         <div class="field {% if form.image.errors %}error{% endif %}">
             {{ form.image.label_tag }}
+            <div class="ui inverted fluid popup">
+                <p>If you have some concept images or screen-shots, upload here</p>
+            </div>
             <div class="ui left icon input">
                 {{ form.image }}
                 <i class="icon fa fa-file-picture-o"></i>
@@ -80,5 +98,6 @@
             $('#error-message').css('display', 'block');
         {% endif %}
         initializeDropdowns();
+        initializePopups();
     </script>
 {% endblock %}
