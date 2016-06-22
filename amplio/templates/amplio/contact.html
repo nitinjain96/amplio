@@ -64,6 +64,9 @@
     <p>This website is not for you, buddy. Move along! If you feel inspired, learn <a
             href="http://www.djangoproject.com/">Django</a> and make an app like this for your own college.</p>
     <script>
+        {% if state == 'failure' %}
+            $('#error-message').css('display', 'block');
+        {% endif %}
         initializePopups();
     </script>
 {% endblock %}
