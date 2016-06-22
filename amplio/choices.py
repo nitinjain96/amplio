@@ -16,9 +16,9 @@ FEEDBACK_TYPE_CHOICES = (
 )
 
 FEEDBACK_TO_CHOICES = (
+    (choice_constants.IMG, 'IMG developers and designers'),
     (choice_constants.IMG_DEVELOPER, 'IMG developers'),
     (choice_constants.IMG_DESIGNER, 'IMG designers'),
-    (choice_constants.IMG, 'IMG developers and designers'),
     (choice_constants.IIT_OFFICIAL, 'IIT officials')
 )
 
