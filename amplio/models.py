@@ -11,7 +11,7 @@ fs = FileSystemStorage(location=settings.STATIC_URL)
 
 class User(models.Model):
     name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, primary_key=True)
     password_hash = models.CharField(max_length=2047)
     post = models.IntegerField(choices=choices.USER_POST_CHOICES,
                                default=choice_constants.STUDENT)
