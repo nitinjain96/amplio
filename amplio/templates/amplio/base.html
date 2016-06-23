@@ -45,11 +45,11 @@
         <div class="menu">
             {% if request.session.user_email %}
                 <a class="item" href="{% url 'amplio:compose' %}">Compose</a>
-                <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
             {% else %}
                 <a class="item" href="{% url 'amplio:sign_in' %}">Sign in</a>
                 <a class="item" href="{% url 'amplio:sign_up' %}">Sign up</a>
             {% endif %}
+            <a class="item" href="{% url 'amplio:browse' %}">Browse</a>
         </div>
     </div>
     {% if request.session.user_email %}
