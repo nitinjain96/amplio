@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^sign-up/$', views.sign_up, name='sign_up'),
     url(r'^sign-out/$', views.sign_out, name='sign_out'),
     url(r'^terms/$', views.terms, name='terms'),
+    url(r'^vote/$', views.vote, name='vote'),
 ]
