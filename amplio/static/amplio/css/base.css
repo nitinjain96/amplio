@@ -53,6 +53,10 @@ main {
     width: 50%;
 }
 
+.ui.basic.label {
+    cursor: default;
+}
+
 footer {
     border-top: 1px solid #dddddd;
     padding: 1em;
