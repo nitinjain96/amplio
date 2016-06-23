@@ -109,7 +109,7 @@ def sign_in(request):
         form = forms.SignInForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
-            request.session['user_email'] = email
+            request.session['user_email'] = models.User.objects.get(email=email).email
             return redirect(reverse('amplio:index'))
         else:
             return render(request, 'amplio/sign-in.html', {
