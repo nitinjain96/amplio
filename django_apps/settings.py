@@ -102,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -114,6 +114,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Media files uploaded by the users
+
+MEDIA_ROOT = 'C:/Users/dhruv/PycharmProjects/django_apps/amplio/media/'
+
+MEDIA_URL = '/media/'
+
+# Emailing over SMTP protocol provided by SendGrid
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
