@@ -70,6 +70,10 @@
         {% if state == 'failure' %}
             $('#error-message').css('display', 'block');
         {% endif %}
+        {% if state == 'success' %}
+            $('.ui.form .field').hide();
+            $('.ui.form .button').hide();
+        {% endif %}
         initializePopups();
     </script>
 {% endblock %}
