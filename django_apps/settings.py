@@ -117,7 +117,7 @@ STATIC_URL = '/static/'
 
 # Media files uploaded by the users
 
-MEDIA_ROOT = 'C:/Users/dhruv/PycharmProjects/django_apps/amplio/media/'
+MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, 'amplio'), 'media')
 
 MEDIA_URL = '/media/'
 
