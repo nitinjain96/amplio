@@ -1,0 +1,31 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block main_block %}
+    <h1>Profile</h1>
+    <h2>Welcome, {{ user.name }}</h2>
+    <div class="ui stackable grid">
+        <div class="four wide column">
+            <div class="ui fluid card">
+                <div class="image">
+                    <img src="amplio/{{ user.image.url }}">
+                </div>
+                <div class="content">
+                    <div class="header">{{ user.name }}</div>
+                    <div class="meta">{{ user.email }}</div>
+                    <div class="description">{{ user.post }} at IIT Roorkee</div>
+                </div>
+                <div class="ui bottom attached animated basic button">
+                    <div class="visible content">
+                        &nbsp;&nbsp;&nbsp;<span class="fa fa-pencil"></span>&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="hidden content">Edit</div>
+                </div>
+            </div>
+        </div>
+        <div class="eight wide column">
+        </div>
+    </div>
+{% endblock %}
