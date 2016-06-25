@@ -2,7 +2,7 @@ from hashlib import md5
 
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 
 from amplio import models, forms
@@ -22,10 +22,22 @@ def about(request):
 
 
 def browse(request):
-    return HttpResponse("Work in progress")
+    feedback_list = None
+    if request.method == 'GET':
+        sort_by = '-votes'
+        feedback_list = models.Feedback.objects.order_by(sort_by)[:20]
+    if request.method == 'POST':
+        sort_by = request.POST.get('sort_by')
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+        feedback_list = models.Feedback.objects.order_by(sort_by)[start:end]
+    return render(request, 'amplio/browse.html', {'feedback_list': feedback_list})
 
 
 def compose(request):
+    user_email = request.session.get('user_email', '')
+    if len(user_email) == 0:
+        return redirect(reverse('amplio:sign_in'))
     if request.method == 'GET':
         form = forms.FeedbackForm()
         return render(request, 'amplio/compose.html', {
@@ -33,9 +45,6 @@ def compose(request):
             'form': form
         })
     if request.method == 'POST':
-        user_email = request.session.get('user_email', '')
-        if len(user_email) == 0:
-            return redirect(reverse('amplio:log_in'))
         form = forms.FeedbackForm(request.POST, request.FILES)
         if form.is_valid():
             new_form = forms.FeedbackForm()
@@ -91,7 +100,11 @@ def contact(request):
 
 
 def profile(request):
-    return HttpResponse("Work in progress")
+    email = request.session.get('user_email', '')
+    if len(email) == 0:
+        return redirect(reverse('amplio:sign_in'))
+    user = models.User.objects.get(email=email)
+    return render(request, 'amplio/profile.html', {'user': user})
 
 
 def search(request):
@@ -109,7 +122,10 @@ def sign_in(request):
         form = forms.SignInForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
-            request.session['user_email'] = models.User.objects.get(email=email).email
+            user = models.User.objects.get(email=email)
+            request.session['user_name'] = user.name
+            request.session['user_email'] = user.email
+            request.session['user_image'] = user.image
             return redirect(reverse('amplio:index'))
         else:
             return render(request, 'amplio/sign-in.html', {
@@ -154,3 +170,14 @@ def sign_out(request):
 
 def terms(request):
     return render(request, 'amplio/terms.html')
+
+
+def vote(request):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        feedback = models.Feedback.objects.get(pk=id)
+        feedback.votes += 1
+        feedback.save()
+        return HttpResponse(feedback.votes)
+    else:
+        raise Http404('No GET interface has been defined for amplio.views.vote')
