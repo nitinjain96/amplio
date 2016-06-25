@@ -91,7 +91,16 @@
         </div>
         <!-- Area to show the user functions of logged-in users -->
         <div id="user">
-            {% block user_block %}{% endblock %}
+            {% if request.session.user_email %}
+                <div class="ui card">
+                    <div class="content">
+                        <img src="{{ request.session.user_image.url }}" class="ui right floated mini circular image">
+                        <div class="header">{{ request.session.user_name }}</div>
+                        <div class="meta">{{ request.session.user_email }}</div>
+                    </div>
+                </div>
+            {% else %}
+            {% endif %}
         </div>
     </header>
     <!-- Page content -->
