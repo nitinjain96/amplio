@@ -57,6 +57,10 @@ main {
     width: 50%;
 }
 
+.ui.grid {
+    width: 100%;
+}
+
 .ui.basic.label {
     cursor: default;
 }
