@@ -1,12 +1,16 @@
-from datetime import datetime
+from hashlib import md5
 
-from django.core.files.storage import FileSystemStorage
 from django.db import models
+from django.utils import timezone
 
 from amplio import choices, choice_constants
-from django_apps import settings
 
-fs = FileSystemStorage(location=settings.STATIC_URL)
+
+def user_upload_image(instance, filename):
+    email = instance.email
+    email_hash = md5(email.encode('utf-8')).hexdigest()
+    path = 'amplio/user/{email_hash}'.format(email_hash=email_hash)
+    return path
 
 
 class User(models.Model):
@@ -15,6 +19,8 @@ class User(models.Model):
     password_hash = models.CharField(max_length=2047)
     post = models.IntegerField(choices=choices.USER_POST_CHOICES,
                                default=choice_constants.STUDENT)
+    image = models.ImageField(upload_to=user_upload_image,
+                              blank=True)
 
     def __str__(self):
         return self.name
@@ -29,11 +35,10 @@ class Feedback(models.Model):
                              default=choice_constants.IMG)
     category = models.IntegerField(choices=choices.FEEDBACK_CATEGORY_CHOICES,
                                    default=choice_constants.NO_SPECIFIC_CATEGORY)
-    image = models.ImageField(upload_to='amplio/images',
-                              storage=fs,
+    image = models.ImageField(upload_to='amplio/feedback/',
                               blank=True)
 
-    time = models.DateTimeField(default=datetime.now)
+    time = models.DateTimeField(default=timezone.now)
     votes = models.IntegerField(default=0)
     status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES,
                                  default=choice_constants.REPORTED)
@@ -44,11 +49,26 @@ class Feedback(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        super(Feedback, self).save(*args, **kwargs)
+        image = self.image
+        if image:
+            old_name = image.name
+            dot_position = old_name.rfind('.')
+            new_name = 'amplio/feedback/' + str(self.pk) + old_name[dot_position:]
+            if new_name != old_name:
+                self.image.storage.delete(new_name)
+                self.image.storage.save(new_name, image)
+                self.image.name = new_name
+                self.image.close()
+                self.image.storage.delete(old_name)
+        super(Feedback, self).save(*args, **kwargs)
+
 
 class Comment(models.Model):
     text = models.TextField()
 
-    time = models.DateTimeField(default=datetime.now)
+    time = models.DateTimeField(default=timezone.now)
     upon = models.IntegerField(choices=choices.COMMENT_UPON_CHOICES)
     votes = models.IntegerField(default=0)
 
