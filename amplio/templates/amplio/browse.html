@@ -1,0 +1,91 @@
+{% extends 'amplio/base.html' %}
+{% load static from staticfiles %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block main_block %}
+    <h1>Browse feedback</h1>
+    {% if feedback_list %}
+        <p>
+            For filtering options, <a href="#" onclick="showSidebar()">open the sidebar</a>.
+        </p>
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title and description</th>
+                <th>Category</th>
+                <th>Votes</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for feedback in feedback_list %}
+                <tr>
+                    <td class="collapsing">&nbsp;&nbsp;{{ feedback.id }}&nbsp;&nbsp;</td>
+                    <td>
+                        <div class="ui header">{{ feedback.title }}</div>
+                        <p>{{ feedback.description }}</p>
+                    </td>
+                    <td>{{ feedback.get_category_display }}</td>
+                    <td class="collapsing">
+                        <div class="ui left labeled button">
+                            <div class="ui basic label" id="votes-{{ feedback.id }}">
+                                {{ feedback.votes }}
+                            </div>
+                            {% if request.session.user_email %}
+                                {% if feedback.by_id == request.session.user_email %}
+                                    <div class="ui button vote-on-self-feedback" data-position="left center">
+                                        <span class="fa fa-frown-o"></span>
+                                    </div>
+                                    <div class="ui inverted popup">
+                                        <p>Cannot vote for own feedback</p>
+                                    </div>
+                                {% else %}
+                                    <div class="ui button"
+                                         onclick="vote(this, {{ feedback.id }}, '{% url 'amplio:vote' %}')">
+                                        <span class="fa fa-heart"></span>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="ui button vote-without-sign-in"
+                                     onclick="goTo('{% url 'amplio:sign_in' %}')" data-position="left center">
+                                    <span class="fa fa-sign-in"></span>
+                                </div>
+                                <div class="ui inverted popup">
+                                    <p>Sign in to vote</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="4">
+                    <div class="ui right floated pagination menu">
+                        <a href="" class="icon item">
+                            <span class="fa fa-chevron-left"></span>
+                        </a>
+
+                        <a href="" class="icon item">
+                            <span class="fa fa-chevron-right"></span>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    {% else %}
+        <p>
+            There is no feedback in the system right now. {% if request.session.user_email %}You can be the first person
+            to <a href="{% url 'amplio:compose' %}">compose feedback</a>!{% else %}You can submit your own feedback
+            after you <a href="{% url 'amplio:sign_in' %}">sign in</a>.{% endif %}
+        </p>
+    {% endif %}
+    <script>
+        $('.vote-without-sign-in').popup({inline: true});
+        $('.vote-on-self-feedback').popup({inline: true});
+        setUpAjax()
+    </script>
+{% endblock %}
