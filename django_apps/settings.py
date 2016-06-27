@@ -113,13 +113,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_ROOT = 'C:\\wamp64\\www\\amplio\\static'
+STATIC_ROOT = '/var/www/amplio/static/'
 
 STATIC_URL = '/static/'
 
 # Media files uploaded by the users
 
-MEDIA_ROOT = 'C:\\wamp64\\www\\amplio\\media'
+MEDIA_ROOT = '/var/www/amplio/media/'
 
 MEDIA_URL = '/media/'
 
