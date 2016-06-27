@@ -99,6 +99,10 @@ def contact(request):
             })
 
 
+def edit_profile(request):
+    return HttpResponse("Work in progress")
+
+
 def profile(request):
     email = request.session.get('user_email', '')
     if len(email) == 0:
@@ -125,7 +129,7 @@ def sign_in(request):
             user = models.User.objects.get(email=email)
             request.session['user_name'] = user.name
             request.session['user_email'] = user.email
-            request.session['user_name_email_hash'] = md5((user.name+user.email).encode('utf-8')).hexdigest()
+            request.session['user_name_email_hash'] = md5((user.name + user.email).encode('utf-8')).hexdigest()
             if user.image:
                 request.session['user_image_url'] = user.image.url
             return redirect(reverse('amplio:index'))
