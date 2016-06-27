@@ -9,7 +9,7 @@ from amplio import choices, choice_constants
 def user_upload_image(instance, filename):
     email = instance.email
     email_hash = md5(email.encode('utf-8')).hexdigest()
-    path = 'user/{email_hash}'.format(email_hash=email_hash)
+    path = 'amplio/user/{email_hash}'.format(email_hash=email_hash)
     return path
 
 
@@ -35,7 +35,7 @@ class Feedback(models.Model):
                              default=choice_constants.IMG)
     category = models.IntegerField(choices=choices.FEEDBACK_CATEGORY_CHOICES,
                                    default=choice_constants.NO_SPECIFIC_CATEGORY)
-    image = models.ImageField(upload_to='feedback/',
+    image = models.ImageField(upload_to='amplio/feedback/',
                               blank=True)
 
     time = models.DateTimeField(default=timezone.now)
@@ -55,7 +55,7 @@ class Feedback(models.Model):
         if image:
             old_name = image.name
             dot_position = old_name.rfind('.')
-            new_name = 'feedback/' + str(self.pk) + old_name[dot_position:]
+            new_name = 'amplio/feedback/' + str(self.pk) + old_name[dot_position:]
             if new_name != old_name:
                 self.image.storage.delete(new_name)
                 self.image.storage.save(new_name, image)
