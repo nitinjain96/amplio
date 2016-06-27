@@ -37,10 +37,6 @@ h1 {
     flex-grow: 0;
 }
 
-.circular {
-    border-radius: 50%;
-}
-
 main {
     display: flex;
     flex-direction: column;
