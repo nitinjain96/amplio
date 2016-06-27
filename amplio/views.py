@@ -125,7 +125,8 @@ def sign_in(request):
             user = models.User.objects.get(email=email)
             request.session['user_name'] = user.name
             request.session['user_email'] = user.email
-            request.session['user_image'] = user.image
+            if user.image:
+                request.session['user_image_url'] = user.image.url
             return redirect(reverse('amplio:index'))
         else:
             return render(request, 'amplio/sign-in.html', {
