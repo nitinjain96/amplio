@@ -9,7 +9,7 @@
     <form action="{% url 'amplio:contact' %}" method="post"
           class="ui form {% if state == 'success' %}success{% endif %}" name="contact">
         {% csrf_token %}
-        <div class="field {% if form.email.errors %}error{% endif %}">
+        <div class="field {% if form.name.errors %}error{% endif %}">
             {{ form.name.label_tag }}
             <div class="ui inverted fluid popup">
                 <p>What do people call you?</p>
@@ -29,7 +29,7 @@
                 <i class="icon fa fa-envelope"></i>
             </div>
         </div>
-        <div class="field {% if form.email.errors %}error{% endif %}">
+        <div class="field {% if form.message.errors %}error{% endif %}">
             {{ form.message.label_tag }}
             <div class="ui inverted fluid popup">
                 <p>Enter your message in full detail</p>
