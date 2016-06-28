@@ -99,10 +99,6 @@ def contact(request):
             })
 
 
-def edit_profile(request):
-    return HttpResponse("Work in progress")
-
-
 def profile(request):
     email = request.session.get('user_email', '')
     if len(email) == 0:
