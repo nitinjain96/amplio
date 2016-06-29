@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^compose/$', views.compose, name='compose'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^remove-image/$', views.remove_image, name='remove_image'),
     url(r'^search/$', views.search, name='search'),
     url(r'^sign-in/$', views.sign_in, name='sign_in'),
     url(r'^sign-up/$', views.sign_up, name='sign_up'),
