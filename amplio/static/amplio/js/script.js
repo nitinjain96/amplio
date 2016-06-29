@@ -21,8 +21,8 @@ function initializeDropdowns() {
     $('.ui.dropdown').dropdown();
 }
 
-function initializePopups() {
-    $('label').popup({inline: true});
+function initializePopups(string) {
+    $(string).popup({inline: true});
 }
 
 function getCookie(name) {
