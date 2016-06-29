@@ -37,6 +37,10 @@ h1 {
     flex-grow: 0;
 }
 
+svg {
+    background-color: white !important;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -51,6 +55,10 @@ main {
 
 .ui.form {
     width: 50%;
+}
+
+i.icon {
+    font-family: FontAwesome, sans-serif !important;
 }
 
 .ui.grid {
