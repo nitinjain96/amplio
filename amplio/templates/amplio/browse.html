@@ -84,8 +84,8 @@
         </p>
     {% endif %}
     <script>
-        $('.vote-without-sign-in').popup({inline: true});
-        $('.vote-on-self-feedback').popup({inline: true});
-        setUpAjax()
+        setUpAjax();
+        initializePopups('.vote-without-sign-in');
+        initializePopups('.vote-on-self-feedback');
     </script>
 {% endblock %}
