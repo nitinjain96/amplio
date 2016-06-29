@@ -10,22 +10,89 @@
         <div class="four wide column">
             <div class="ui fluid card">
                 <div class="image">
-                    <img src="amplio/{{ user.image.url }}">
+                    {% if user.image %}
+                        <img class="ui fluid image" src="{{ user.image.url }}">
+                    {% else %}
+                        <svg class="ui fluid image"
+                             data-jdenticon-hash="{{ request.session.user_name_email_hash }}"
+                             viewBox="0 0 100 100">
+                        </svg>
+                    {% endif %}
                 </div>
                 <div class="content">
                     <div class="header">{{ user.name }}</div>
                     <div class="meta">{{ user.email }}</div>
-                    <div class="description">{{ user.post }} at IIT Roorkee</div>
-                </div>
-                <div class="ui bottom attached animated basic button">
-                    <div class="visible content">
-                        &nbsp;&nbsp;&nbsp;<span class="fa fa-pencil"></span>&nbsp;&nbsp;&nbsp;
-                    </div>
-                    <div class="hidden content">Edit</div>
+                    <div class="description">{{ user.get_post_display }} at IIT Roorkee</div>
                 </div>
             </div>
         </div>
-        <div class="eight wide column">
+        <div class="twelve wide column">
+            <div class="ui top attached tabular menu">
+                <a class="item active" data-tab="edit">Edit</a>
+                <a class="item" data-tab="feedback">Feedback</a>
+                <a class="item" data-tab="comment
+                s">Comments</a>
+                <a class="item" data-tab="account">Account</a>
+            </div>
+            <div class="ui bottom attached tab segment active" data-tab="edit">
+                <form action="{% url 'amplio:profile' %}" method="post"
+                      class="ui form {% if state == 'success' %}success{% endif %}" enctype="multipart/form-data"
+                      name="edit-profile">
+                    {% csrf_token %}
+                    <div class="field {% if form.name.errors %}error{% endif %}">
+                        {{ form.name.label_tag }}
+                        <div class="ui inverted fluid popup">
+                            <p>What do people call you?</p>
+                        </div>
+                        <div class="ui left icon input">
+                            {{ form.name }}
+                            <i class="icon fa fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="field {% if form.image.errors %}error{% endif %}">
+                        {{ form.image.label_tag }}
+                        <div class="ui inverted fluid popup">
+                            <p>To keep the previous image, leave this field blank</p>
+                        </div>
+                        <div class="ui left icon input">
+                            {{ form.image }}
+                            <i class="icon fa fa-file-picture-o"></i>
+                        </div>
+                    </div>
+                    <div class="ui animated basic button" onclick="document.forms['edit-profile'].submit()">
+                        <div class="visible content">
+                            &nbsp;&nbsp;&nbsp;<span class="fa fa-user"></span>&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="hidden content">Update</div>
+                    </div>
+                    <div class="ui error message" id="error-message">
+                        <ul class="list">
+                            {% if form.name.errors %}
+                                <li>{{ form.name.errors|striptags }}</li>
+                            {% endif %}
+                            {% if form.image.errors %}
+                                <li>{{ form.image.errors|striptags }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="ui success message" id="success-message">
+                        <div class="header">Great success!</div>
+                        <p>
+                            Your details have been updated.
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="ui bottom attached tab segment" data-tab="feedback">
+            </div>
+            <div class="ui bottom attached tab segment" data-tab="comments">
+            </div>
+            <div class="ui bottom attached tab segment" data-tab="account">
+            </div>
         </div>
     </div>
+    <script>
+        $('.menu .item').tab();
+        initializePopups('label');
+    </script>
 {% endblock %}
