@@ -1,11 +1,22 @@
 from hashlib import md5
 
-from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 
 from amplio import models, forms
+
+
+def populate_session(request, user):
+    request.session['user_name'] = user.name
+    request.session['user_email'] = user.email
+    request.session['user_name_email_hash'] = md5((user.email + user.name).encode('utf-8')).hexdigest()
+    if user.image:
+        request.session['user_image_url'] = user.image.url
+    else:
+        if 'user_image_url' in request.session:
+            del request.session['user_image_url']
 
 
 def index(request):
@@ -104,7 +115,52 @@ def profile(request):
     if len(email) == 0:
         return redirect(reverse('amplio:sign_in'))
     user = models.User.objects.get(email=email)
-    return render(request, 'amplio/profile.html', {'user': user})
+    if request.method == 'GET':
+        data = {
+            'name': user.name,
+            'image': user.image,
+        }
+        form = forms.EditProfileForm(data=data)
+        return render(request, 'amplio/profile.html', {
+            'user': user,
+            'state': 'blank',
+            'form': form,
+        })
+    if request.method == 'POST':
+        form = forms.EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data.get('name', '')
+            image = form.cleaned_data.get('image')
+            user.name = name
+            if image is not None:
+                user.image = image
+            user.save()
+            populate_session(request, user)
+            return render(request, 'amplio/profile.html', {
+                'user': user,
+                'state': 'success',
+                'form': form,
+            })
+        else:
+            return render(request, 'amplio/profile.html', {
+                'user': user,
+                'state': 'failure',
+                'form': form,
+            })
+
+
+def remove_image(request):
+    if request.method == 'POST':
+        email = request.session.get('user_email', '')
+        if len(email) == 0:
+            return Http404('You need to be logged in to access this interface')
+        user = models.User.objects.get(email=email)
+        user.image = None
+        user.save()
+        populate_session(request, user)
+        return HttpResponse('OK')
+    else:
+        return Http404('No GET interface has been defined for amplio.views.remove_image')
 
 
 def search(request):
@@ -123,11 +179,7 @@ def sign_in(request):
         if form.is_valid():
             email = form.cleaned_data.get('email')
             user = models.User.objects.get(email=email)
-            request.session['user_name'] = user.name
-            request.session['user_email'] = user.email
-            request.session['user_name_email_hash'] = md5((user.name + user.email).encode('utf-8')).hexdigest()
-            if user.image:
-                request.session['user_image_url'] = user.image.url
+            populate_session(request, user)
             return redirect(reverse('amplio:index'))
         else:
             return render(request, 'amplio/sign-in.html', {
