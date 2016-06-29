@@ -20,6 +20,8 @@ class User(models.Model):
     post = models.IntegerField(choices=choices.USER_POST_CHOICES, default=choice_constants.STUDENT)
     image = models.ImageField(upload_to=user_upload_image, blank=True)
 
+    likes = models.ManyToManyField(Feedback)
+
     def __str__(self):
         return self.name
 
