@@ -27,6 +27,12 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/ico" href="{% static 'amplio/ico/favicon.ico' %}">
+
+    <script>
+        $(document).ready(function() {
+            initializeDropdowns();
+        })
+    </script>
 </head>
 <body>
 <!-- Sidebar -->
@@ -94,22 +100,34 @@
         <!-- Area to show the user functions of logged-in users -->
         <div id="user">
             {% if request.session.user_email %}
-                <div class="ui card">
-                    <div class="content">
-                        {% if request.session.user_image %}
-                            <img src="{{ request.session.user_image_url }}"
-                                 class="ui right floated mini circular image">
-                        {% else %}
-                            <svg class="ui right floated mini circular image"
-                                 data-jdenticon-hash="{{ request.session.user_name_email_hash }}"
-                                 viewBox="0 0 100 100">
-                            </svg>
-                        {% endif %}
-                        <div class="header">{{ request.session.user_name }}</div>
-                        <div class="meta">{{ request.session.user_email }}</div>
+                <div class="ui top right pointing fluid dropdown">
+                    <div class="ui card">
+                        <div class="content">
+                            {% if request.session.user_image_url %}
+                                <img src="{{ request.session.user_image_url }}"
+                                     class="ui right floated mini circular image">
+                            {% else %}
+                                <svg class="ui right floated mini circular image"
+                                     data-jdenticon-hash="{{ request.session.user_name_email_hash }}"
+                                     viewBox="0 0 100 100">
+                                </svg>
+                            {% endif %}
+                            <div class="header">{{ request.session.user_name }}</div>
+                            <div class="meta">{{ request.session.user_email }}</div>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <div class="item" onclick="goTo('{% url 'amplio:profile' %}')">
+                            <span class="fa fa-fw fa-user"></span>&nbsp;&nbsp;&nbsp;Profile
+                        </div>
+                        <div class="item" onclick="goTo('{% url 'amplio:compose' %}')">
+                            <span class="fa fa-fw fa-pencil"></span>&nbsp;&nbsp;&nbsp;Compose
+                        </div>
+                        <div class="item" onclick="goTo('{% url 'amplio:sign_out' %}')">
+                            <span class="fa fa-fw fa-sign-out"></span>&nbsp;&nbsp;&nbsp;Sign out
+                        </div>
                     </div>
                 </div>
-            {% else %}
             {% endif %}
         </div>
     </header>
