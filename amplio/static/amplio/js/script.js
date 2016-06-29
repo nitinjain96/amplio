@@ -66,3 +66,17 @@ function vote(div, feedback_id, url) {
         }
     )
 }
+
+function removeImage(url, reload) {
+    $.post(
+        url,
+        {},
+        function (data) {
+            if (data === 'OK') {
+                goTo(reload);
+            } else {
+                console.log('OK was not returned');
+            }
+        }
+    )
+}
