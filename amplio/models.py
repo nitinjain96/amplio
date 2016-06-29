@@ -20,8 +20,6 @@ class User(models.Model):
     post = models.IntegerField(choices=choices.USER_POST_CHOICES, default=choice_constants.STUDENT)
     image = models.ImageField(upload_to=user_upload_image, blank=True)
 
-    likes = models.ManyToManyField(Feedback)
-
     def __str__(self):
         return self.name
 
@@ -40,6 +38,7 @@ class Feedback(models.Model):
     status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES, default=choice_constants.REPORTED)
 
     by = models.ForeignKey(User, on_delete=models.CASCADE)
+    patrons = models.ManyToManyField(User, related_name='patronized_feedback_set')
 
     def __str__(self):
         return self.title
