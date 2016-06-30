@@ -49,8 +49,7 @@
             <div class="ui top attached tabular menu" id="tabs">
                 <a class="item active" data-tab="edit">Edit</a>
                 <a class="item" data-tab="feedback">Feedback</a>
-                <a class="item" data-tab="comment
-                s">Comments</a>
+                <a class="item" data-tab="comments">Comments</a>
                 <a class="item" data-tab="account">Account</a>
             </div>
             <div class="ui bottom attached tab segment active" data-tab="edit">
@@ -112,7 +111,7 @@
     </div>
     <script>
         setUpAjax();
-        $('#tabs').find('item').tab();
+        $('#tabs').find('.item').tab();
         $('.special.card .image').dimmer({on: 'hover'});
         initializePopups('label');
     </script>
