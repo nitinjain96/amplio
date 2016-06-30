@@ -30,7 +30,7 @@
                     <td class="collapsing">
                         <div class="ui left labeled button">
                             <div class="ui basic label" id="votes-{{ feedback.id }}">
-                                {{ feedback.votes }}
+                                {{ feedback.patrons.count }}
                             </div>
                             {% if request.session.user_email %}
                                 {% if feedback.by_id == request.session.user_email %}
@@ -41,9 +41,13 @@
                                         <p>Cannot vote for own feedback</p>
                                     </div>
                                 {% else %}
-                                    <div class="ui button"
-                                         onclick="vote(this, {{ feedback.id }}, '{% url 'amplio:vote' %}')">
-                                        <span class="fa fa-heart"></span>
+                                    <div class="ui vote button" data-feedback-id="{{ feedback.id }}"
+                                         onclick="vote(this, '{% url 'amplio:vote' %}')">
+                                        {% if user in feedback.patrons.all %}
+                                            <span class="fa fa-heart" data-voted="true"></span>
+                                        {% else %}
+                                            <span class="fa fa-heart-o" data-voted="false"></span>
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             {% else %}
