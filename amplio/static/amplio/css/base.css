@@ -37,6 +37,10 @@ h1 {
     flex-grow: 0;
 }
 
+#not-signed-in-card {
+    width: unset;
+}
+
 svg {
     background-color: white !important;
 }
