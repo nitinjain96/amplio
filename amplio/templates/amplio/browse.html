@@ -29,32 +29,32 @@
                     <td>{{ feedback.get_category_display }}</td>
                     <td class="collapsing">
                         <div class="ui left labeled button">
-                            <div class="ui basic label" id="votes-{{ feedback.id }}">
+                            <div class="ui basic right pointing label" id="votes-{{ feedback.id }}">
                                 {{ feedback.patrons.count }}
                             </div>
                             {% if request.session.user_email %}
                                 {% if feedback.by_id == request.session.user_email %}
-                                    <div class="ui button vote-on-self-feedback" data-position="left center">
+                                    <button class="ui button vote-on-self-feedback" data-position="left center">
                                         <span class="fa fa-frown-o"></span>
-                                    </div>
+                                    </button>
                                     <div class="ui inverted popup">
                                         <p>Cannot vote for own feedback</p>
                                     </div>
                                 {% else %}
-                                    <div class="ui vote button" tabindex="0" data-feedback-id="{{ feedback.id }}"
+                                    <button class="ui vote button" tabindex="0" data-feedback-id="{{ feedback.id }}"
                                          onclick="vote(this, '{% url 'amplio:vote' %}')">
                                         {% if user in feedback.patrons.all %}
-                                            <span class="fa fa-heart" data-voted="true"></span>
+                                            <span class="red-text fa fa-heart" data-voted="true"></span>
                                         {% else %}
                                             <span class="fa fa-heart-o" data-voted="false"></span>
                                         {% endif %}
-                                    </div>
+                                    </button>
                                 {% endif %}
                             {% else %}
-                                <div class="ui button vote-without-sign-in"
+                                <button class="ui button vote-without-sign-in"
                                      onclick="goTo('{% url 'amplio:sign_in' %}')" data-position="left center">
                                     <span class="fa fa-sign-in"></span>
-                                </div>
+                                </button>
                                 <div class="ui inverted popup">
                                     <p>Sign in to vote</p>
                                 </div>
