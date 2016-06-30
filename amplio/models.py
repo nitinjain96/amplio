@@ -34,7 +34,6 @@ class Feedback(models.Model):
     image = models.ImageField(upload_to='amplio/feedback/', blank=True)
 
     time = models.DateTimeField(default=timezone.now)
-    votes = models.IntegerField(default=0)
     status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES, default=choice_constants.REPORTED)
 
     by = models.ForeignKey(User, on_delete=models.CASCADE)
