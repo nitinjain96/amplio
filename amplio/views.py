@@ -2,6 +2,7 @@ from hashlib import md5
 
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 
@@ -35,14 +36,13 @@ def about(request):
 def browse(request):
     feedback_list = None
     if request.method == 'GET':
-        sort_by = '-votes'
-        feedback_list = models.Feedback.objects.order_by(sort_by)[:20]
-    if request.method == 'POST':
-        sort_by = request.POST.get('sort_by')
-        start = request.POST.get('start')
-        end = request.POST.get('end')
-        feedback_list = models.Feedback.objects.order_by(sort_by)[start:end]
-    return render(request, 'amplio/browse.html', {'feedback_list': feedback_list})
+        feedback_list = models.Feedback.objects.annotate(patron_count=Count('patrons')).order_by('-patron_count')[:20]
+    email = request.session.get('user_email')
+    if len(email) == 0:
+        user = None
+    else:
+        user = models.User.objects.get(email=email)
+    return render(request, 'amplio/browse.html', {'feedback_list': feedback_list, 'user': user})
 
 
 def compose(request):
@@ -61,7 +61,7 @@ def compose(request):
             new_form = forms.FeedbackForm()
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
-            type = form.cleaned_data.get('type')
+            feedback_type = form.cleaned_data.get('type')  # Just so that the inbuilt 'type' is not overshadowed
             to = form.cleaned_data.get('to')
             category = form.cleaned_data.get('category')
             image = form.cleaned_data.get('image')
@@ -69,11 +69,13 @@ def compose(request):
             feedback = models.Feedback(
                 title=title,
                 description=description,
-                type=type, to=to,
+                type=feedback_type, to=to,
                 category=category,
-                image=image,
                 by=user
             )
+            feedback.save()
+            # Now object has an ID which will be used in setting the save path for the image
+            feedback.image = image
             feedback.save()
             return render(request, 'amplio/compose.html', {
                 'state': 'success',
@@ -228,10 +230,17 @@ def terms(request):
 
 def vote(request):
     if request.method == 'POST':
-        id = request.POST.get('id')
-        feedback = models.Feedback.objects.get(pk=id)
-        feedback.votes += 1
+        email = request.session.get('user_email', '')
+        if len(email) == 0:
+            return Http404('You need to be logged in to access this interface')
+        user = models.User.objects.get(email=email)
+        feedback_id = request.POST.get('id')
+        feedback = models.Feedback.objects.get(pk=feedback_id)
+        if feedback.patrons.filter(email=email).exists():
+            feedback.patrons.remove(user)
+        else:
+            feedback.patrons.add(user)
         feedback.save()
-        return HttpResponse(feedback.votes)
+        return HttpResponse(feedback.patrons.count())
     else:
         raise Http404('No GET interface has been defined for amplio.views.vote')
