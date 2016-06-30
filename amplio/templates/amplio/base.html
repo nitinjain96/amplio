@@ -29,7 +29,7 @@
     <link rel="icon" type="image/ico" href="{% static 'amplio/ico/favicon.ico' %}">
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             initializeDropdowns();
         })
     </script>
@@ -125,6 +125,23 @@
                         </div>
                         <div class="item" onclick="goTo('{% url 'amplio:sign_out' %}')">
                             <span class="fa fa-fw fa-sign-out"></span>&nbsp;&nbsp;&nbsp;Sign out
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="ui card" id="not-signed-in-card">
+                    <div class="content">
+                        <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_in' %}')">
+                            <div class="visible content">
+                                &nbsp;&nbsp;&nbsp;<span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="hidden content">Sign in</div>
+                        </div>
+                        <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_up' %}')">
+                            <div class="visible content">
+                                &nbsp;&nbsp;&nbsp;<span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="hidden content">Sign up</div>
                         </div>
                     </div>
                 </div>
