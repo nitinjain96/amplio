@@ -13,6 +13,12 @@ def user_upload_image(instance, filename):
     return path
 
 
+def feedback_upload_image(instance, filename):
+    pk = instance.pk
+    path = 'amplio/feedback/{pk}'.format(pk=pk)
+    return path
+
+
 class User(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True, primary_key=True)
@@ -31,7 +37,7 @@ class Feedback(models.Model):
     to = models.IntegerField(choices=choices.FEEDBACK_TO_CHOICES, default=choice_constants.IMG)
     category = models.IntegerField(choices=choices.FEEDBACK_CATEGORY_CHOICES,
                                    default=choice_constants.NO_SPECIFIC_CATEGORY)
-    image = models.ImageField(upload_to='amplio/feedback/', blank=True)
+    image = models.ImageField(upload_to=feedback_upload_image, blank=True)
 
     time = models.DateTimeField(default=timezone.now)
     status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES, default=choice_constants.REPORTED)
@@ -41,21 +47,6 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        super(Feedback, self).save(*args, **kwargs)
-        image = self.image
-        if image:
-            old_name = image.name
-            dot_position = old_name.rfind('.')
-            new_name = 'amplio/feedback/' + str(self.pk) + old_name[dot_position:]
-            if new_name != old_name:
-                self.image.storage.delete(new_name)
-                self.image.storage.save(new_name, image)
-                self.image.name = new_name
-                self.image.close()
-                self.image.storage.delete(old_name)
-        super(Feedback, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
