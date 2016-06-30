@@ -57,6 +57,10 @@ main {
     align-items: center;
 }
 
+.red-text {
+    color: #db2828;
+}
+
 .ui.form {
     width: 50%;
 }
