@@ -85,7 +85,7 @@
         </div>
         <!-- Button to show sidebar -->
         <div id="menu">
-            <div class="ui animated basic button" onclick="showSidebar()">
+            <div class="ui animated basic button" tabindex="0" onclick="showSidebar()">
                 <div class="visible content">
                     &nbsp;&nbsp;&nbsp;<span class="fa fa-bars"></span>&nbsp;&nbsp;&nbsp;
                 </div>
@@ -126,13 +126,13 @@
             {% else %}
                 <div class="ui card" id="not-signed-in-card">
                     <div class="content">
-                        <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_in' %}')">
+                        <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:sign_in' %}')">
                             <div class="visible content">
                                 &nbsp;&nbsp;&nbsp;<span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="hidden content">Sign in</div>
                         </div>
-                        <div class="ui animated basic button" onclick="goTo('{% url 'amplio:sign_up' %}')">
+                        <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:sign_up' %}')">
                             <div class="visible content">
                                 &nbsp;&nbsp;&nbsp;<span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;
                             </div>

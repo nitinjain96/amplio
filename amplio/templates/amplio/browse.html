@@ -41,7 +41,7 @@
                                         <p>Cannot vote for own feedback</p>
                                     </div>
                                 {% else %}
-                                    <div class="ui vote button" data-feedback-id="{{ feedback.id }}"
+                                    <div class="ui vote button" tabindex="0" data-feedback-id="{{ feedback.id }}"
                                          onclick="vote(this, '{% url 'amplio:vote' %}')">
                                         {% if user in feedback.patrons.all %}
                                             <span class="fa fa-heart" data-voted="true"></span>
