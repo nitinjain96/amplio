@@ -56,15 +56,23 @@ function setUpAjax() {
     });
 }
 
-function vote(div, feedback_id, url) {
+function vote(div, url) {
+    var $div = $(div);
+    var feedback_id = parseInt($div.attr('data-feedback-id'));
     $.post(
         url,
         {id: feedback_id},
         function (data) {
             $('#votes-' + feedback_id).html(data);
-            $(div).addClass("disabled");
         }
-    )
+    );
+    var $span = $div.find('span');
+    if ($span.attr('data-voted') === 'true') {
+        $div.html('<span class="fa fa-heart-o" data-voted="false"></span>');
+    } else {
+        $div.html('<span class="fa fa-heart" data-voted="true"></span>');
+    }
+    
 }
 
 function removeImage(url, reload) {
