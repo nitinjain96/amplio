@@ -36,12 +36,9 @@
             </div>
             {{ form.message }}
         </div>
-        <div class="ui animated basic button" tabindex="0" onclick="document.forms['contact'].submit()">
-            <div class="visible content">
-                &nbsp;&nbsp;&nbsp;<span class="fa fa-envelope"></span>&nbsp;&nbsp;&nbsp;
-            </div>
-            <div class="hidden content">Submit</div>
-        </div>
+        <button type="submit" class="ui primary button">
+            <span class="fa fa-envelope"></span>&nbsp;&nbsp;&nbsp;Submit
+        </button>
         <div class="ui error message" id="error-message">
             <ul class="list">
                 {% if form.name.errors %}

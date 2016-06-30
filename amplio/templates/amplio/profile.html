@@ -77,12 +77,9 @@
                             <i class="icon fa-file-picture-o"></i>
                         </div>
                     </div>
-                    <div class="ui animated basic button" tabindex="0" onclick="document.forms['edit-profile'].submit()">
-                        <div class="visible content">
-                            &nbsp;&nbsp;&nbsp;<span class="fa fa-user"></span>&nbsp;&nbsp;&nbsp;
-                        </div>
-                        <div class="hidden content">Update</div>
-                    </div>
+                    <button type="submit" class="ui primary button">
+                        <span class="fa fa-user"></span>&nbsp;&nbsp;&nbsp;Update
+                    </button>
                     <div class="ui error message" id="error-message">
                         <ul class="list">
                             {% if form.name.errors %}

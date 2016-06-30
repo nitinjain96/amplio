@@ -11,39 +11,24 @@
     </p>
     {% if request.session.user_email %}
         <div>
-            <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:compose' %}')">
-                <div class="visible content">
-                    &nbsp;&nbsp;&nbsp;<span class="fa fa-pencil">&nbsp;&nbsp;&nbsp;</span>
-                </div>
-                <div class="hidden content">Compose</div>
-            </div>
-            <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:browse' %}')">
-                <div class="visible content">
-                    &nbsp;&nbsp;&nbsp;<span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="hidden content">Browse</div>
-            </div>
+            <button class="ui teal button">
+                <span class="fa fa-pencil"></span>&nbsp;&nbsp;&nbsp;Compose
+            </button>
+            <button class="ui teal button">
+                <span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;Browse
+            </button>
         </div>
     {% else %}
         <div>
-            <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:sign_in' %}')">
-                <div class="visible content">
-                    &nbsp;&nbsp;&nbsp;<span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="hidden content">Sign in</div>
-            </div>
-            <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:sign_up' %}')">
-                <div class="visible content">
-                    &nbsp;&nbsp;&nbsp;<span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="hidden content">Sign up</div>
-            </div>
-            <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:browse' %}')">
-                <div class="visible content">
-                    &nbsp;&nbsp;&nbsp;<span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="hidden content">Browse</div>
-            </div>
+            <button class="ui teal button">
+                <span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;Sign in
+            </button>
+            <button class="ui teal button">
+                <span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;Sign up
+            </button>
+            <button class="ui teal button">
+                <span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;Browse
+            </button>
         </div>
     {% endif %}
 {% endblock %}

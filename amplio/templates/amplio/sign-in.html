@@ -32,12 +32,9 @@
                 </button>
             </div>
         </div>
-        <div class="ui animated basic button" tabindex="0" onclick="document.forms['sign-in'].submit()">
-            <div class="visible content">
-                &nbsp;&nbsp;&nbsp;<span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;
-            </div>
-            <div class="hidden content">Sign in</div>
-        </div>
+        <button type="submit" class="ui primary button">
+            <span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;Sign in
+        </button>
         <div class="ui error message" id="error-message">
             <ul class="list">
                 {% if form.non_field_errors %}
