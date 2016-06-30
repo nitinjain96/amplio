@@ -7,7 +7,9 @@
     <h1>Browse feedback</h1>
     {% if feedback_list %}
         <p>
-            For filtering options, <a href="#" onclick="showSidebar()">open the sidebar</a>.
+            For filtering options, <a href="#" onclick="showSidebar()">open the sidebar</a>. Click on the feedback ID to
+            go to
+            the feedback page.
         </p>
         <table class="ui celled table">
             <thead>
@@ -21,7 +23,9 @@
             <tbody>
             {% for feedback in feedback_list %}
                 <tr>
-                    <td class="collapsing">&nbsp;&nbsp;{{ feedback.id }}&nbsp;&nbsp;</td>
+                    <td class="selectable collapsing" onclick="goTo('{% url 'amplio:detail' feedback.id %}')">
+                        {{ feedback.id }}
+                    </td>
                     <td>
                         <div class="ui header">{{ feedback.title }}</div>
                         <p>{{ feedback.description }}</p>
@@ -42,7 +46,7 @@
                                     </div>
                                 {% else %}
                                     <button class="ui vote button" tabindex="0" data-feedback-id="{{ feedback.id }}"
-                                         onclick="vote(this, '{% url 'amplio:vote' %}')">
+                                            onclick="vote(this, '{% url 'amplio:vote' %}')">
                                         {% if user in feedback.patrons.all %}
                                             <span class="red-text fa fa-heart" data-voted="true"></span>
                                         {% else %}
@@ -52,7 +56,7 @@
                                 {% endif %}
                             {% else %}
                                 <button class="ui button vote-without-sign-in"
-                                     onclick="goTo('{% url 'amplio:sign_in' %}')" data-position="left center">
+                                        onclick="goTo('{% url 'amplio:sign_in' %}')" data-position="left center">
                                     <span class="fa fa-sign-in"></span>
                                 </button>
                                 <div class="ui inverted popup">
