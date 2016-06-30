@@ -70,7 +70,7 @@ function vote(div, url) {
     if ($span.attr('data-voted') === 'true') {
         $div.html('<span class="fa fa-heart-o" data-voted="false"></span>');
     } else {
-        $div.html('<span class="fa fa-heart" data-voted="true"></span>');
+        $div.html('<span class="red-text fa fa-heart" data-voted="true"></span>');
     }
     
 }
