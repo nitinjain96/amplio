@@ -77,6 +77,11 @@ i.icon {
     cursor: default;
 }
 
+td.selectable {
+    text-align: center !important;
+    cursor: pointer;
+}
+
 footer {
     border-top: 1px solid #dddddd;
     padding: 1em;
