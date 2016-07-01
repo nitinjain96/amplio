@@ -22,6 +22,7 @@ def feedback_upload_image(instance, filename):
 class User(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True, primary_key=True)
+    name_email_hash = models.CharField(max_length=255)
     password_hash = models.CharField(max_length=2047)
     post = models.IntegerField(choices=choices.USER_POST_CHOICES, default=choice_constants.STUDENT)
     image = models.ImageField(upload_to=user_upload_image, blank=True)
