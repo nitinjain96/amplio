@@ -77,6 +77,10 @@ i.icon {
     cursor: default;
 }
 
+#comments-section {
+    width: 100%;
+}
+
 td.selectable {
     text-align: center !important;
     cursor: pointer;
