@@ -43,7 +43,7 @@ class Feedback(models.Model):
     time = models.DateTimeField(default=timezone.now)
     status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES, default=choice_constants.REPORTED)
 
-    by = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     patrons = models.ManyToManyField(User, related_name='patronized_feedback_set')
 
     def __str__(self):
@@ -62,7 +62,7 @@ class Comment(models.Model):
 
     upon_feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
     upon_comment = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
-    by = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text
