@@ -48,17 +48,24 @@ class Feedback(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def time_sorted_comment_set(self):
+        return self.comment_set.order_by('time')
+
 
 class Comment(models.Model):
     text = models.TextField()
 
     time = models.DateTimeField(default=timezone.now)
-    upon = models.IntegerField(choices=choices.COMMENT_UPON_CHOICES)
     votes = models.IntegerField(default=0)
 
     upon_feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
-    upon_comment = models.ForeignKey('self', on_delete=models.CASCADE, blank=True)
+    upon_comment = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text
+
+    @property
+    def time_sorted_comment_set(self):
+        return self.comment_set.order_by('time')
