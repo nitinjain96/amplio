@@ -5,6 +5,16 @@
 {% block main_block %}
     <h1>Compose feedback</h1>
     <h2>We're all ears. Speak your mind.</h2>
+    <p>
+        Feedback once submitted can not be modified in any way whatsoever, whether you are a student, an IIT official, a
+        member of IMG, a member of the Legislative Assembly, a member of the Parliament, a member of the Cabinet or even
+        the Prime Minister himself. In case the feedback is of a highly controversial nature, it will be taken down and
+        burned in a metaphorical fire.
+    </p>
+    <p>
+        This is because the comments and discussions taken up on the topic will seem ridiculous if the topic itself was
+        to change all of a sudden. So it is a request to please be careful what you type below.
+    </p>
     <form action="{% url 'amplio:compose' %}" method="post"
           class="ui form {% if state == 'success' %}success{% endif %}" enctype="multipart/form-data" name="sign-in">
         {% csrf_token %}
@@ -93,6 +103,7 @@
         </div>
     </form>
     <script>
+        setUpAjax();
         {% if state == 'failure' %}
             $('#error-message').css('display', 'block');
         {% endif %}
