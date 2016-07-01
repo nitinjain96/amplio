@@ -115,9 +115,6 @@
                         <div class="item" onclick="goTo('{% url 'amplio:profile' %}')">
                             <span class="fa fa-fw fa-user"></span>&nbsp;&nbsp;&nbsp;Profile
                         </div>
-                        <div class="item" onclick="goTo('{% url 'amplio:compose' %}')">
-                            <span class="fa fa-fw fa-pencil"></span>&nbsp;&nbsp;&nbsp;Compose
-                        </div>
                         <div class="item" onclick="goTo('{% url 'amplio:sign_out' %}')">
                             <span class="fa fa-fw fa-sign-out"></span>&nbsp;&nbsp;&nbsp;Sign out
                         </div>
@@ -126,18 +123,12 @@
             {% else %}
                 <div class="ui card" id="not-signed-in-card">
                     <div class="content">
-                        <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:sign_in' %}')">
-                            <div class="visible content">
-                                &nbsp;&nbsp;&nbsp;<span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;
-                            </div>
-                            <div class="hidden content">Sign in</div>
-                        </div>
-                        <div class="ui animated basic button" tabindex="0" onclick="goTo('{% url 'amplio:sign_up' %}')">
-                            <div class="visible content">
-                                &nbsp;&nbsp;&nbsp;<span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;
-                            </div>
-                            <div class="hidden content">Sign up</div>
-                        </div>
+                        <a href="{% url 'amplio:sign_in' %}" class="ui teal button">
+                            <span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;Sign in
+                        </a>
+                        <a href="{% url 'amplio:sign_up' %}" class="ui teal button">
+                            <span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;Sign up
+                        </a>
                     </div>
                 </div>
             {% endif %}
