@@ -32,7 +32,7 @@
                         <img class="ui fluid image" src="{{ user.image.url }}" id="card-profile-image">
                     {% else %}
                         <svg class="ui fluid image"
-                             data-jdenticon-hash="{{ request.session.user_name_email_hash }}"
+                             data-jdenticon-hash="{{ user.name_email_hash }}"
                              viewBox="0 0 100 100">
                         </svg>
                     {% endif %}
