@@ -36,7 +36,7 @@
                                 {{ feedback.patrons.count }}
                             </div>
                             {% if request.session.user_email %}
-                                {% if feedback.by_id == request.session.user_email %}
+                                {% if feedback.author_id == request.session.user_email %}
                                     <button class="ui button vote-on-self-feedback" data-position="left center">
                                         <span class="fa fa-frown-o"></span>
                                     </button>
