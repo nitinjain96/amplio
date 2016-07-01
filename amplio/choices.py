@@ -57,8 +57,3 @@ FEEDBACK_STATUS_CHOICES = (
     (choice_constants.UNDER_TESTING, 'Under testing'),
     (choice_constants.COMPLETED, 'Completed'),
 )
-
-COMMENT_UPON_CHOICES = (
-    (choice_constants.COMMENT_ON_FEEDBACK, 'Comment on feedback'),
-    (choice_constants.COMMENT_ON_COMMENT, 'Comment on comment'),
-)
