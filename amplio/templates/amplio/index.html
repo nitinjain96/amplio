@@ -10,24 +10,24 @@
     </p>
     {% if request.session.user_email %}
         <div>
-            <button class="ui teal button">
+            <a href="{% url 'amplio:compose' %}" class="ui teal button">
                 <span class="fa fa-pencil"></span>&nbsp;&nbsp;&nbsp;Compose
-            </button>
-            <button class="ui teal button">
+            </a>
+            <a href="{% url 'amplio:browse' %}" class="ui teal button">
                 <span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;Browse
-            </button>
+            </a>
         </div>
     {% else %}
         <div>
-            <button class="ui teal button">
+            <a href="{% url 'amplio:sign_in' %}" class="ui teal button">
                 <span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;Sign in
-            </button>
-            <button class="ui teal button">
+            </a>
+            <a href="{% url 'amplio:sign_up' %}" class="ui teal button">
                 <span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;Sign up
-            </button>
-            <button class="ui teal button">
-                <span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;Browse
-            </button>
+            </a>
         </div>
+        <a href="{% url 'amplio:browse' %}" class="ui teal button">
+            <span class="fa fa-th-list"></span>&nbsp;&nbsp;&nbsp;Browse
+        </a>
     {% endif %}
 {% endblock %}
