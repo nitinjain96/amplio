@@ -72,7 +72,6 @@ function vote(div, url) {
     } else {
         $div.html('<span class="red-text fa fa-heart" data-voted="true"></span>');
     }
-    
 }
 
 function removeImage(url, reload) {
