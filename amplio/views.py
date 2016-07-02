@@ -115,8 +115,16 @@ def contact(request):
 def detail(request, feedback_id):
     if request.method == 'GET':
         try:
+            email = request.session.get('user_email', '')
+            if len(email) == 0:
+                user = None
+            else:
+                user = models.User.objects.get(email=email)
             feedback = models.Feedback.objects.get(pk=feedback_id)
-            return render(request, 'amplio/detail.html', {'feedback': feedback})
+            return render(request, 'amplio/detail.html', {
+                'user': user,
+                'feedback': feedback,
+            })
         except models.Feedback.DoesNotExist:
             raise Http404('This feedback item does not exist')
 
