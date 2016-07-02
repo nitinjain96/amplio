@@ -1,0 +1,143 @@
+{% extends 'amplio/base.html' %}
+
+{% block title_block %}Your opinion matters{% endblock %}
+
+{% block main_block %}
+    <h1>Detail and discussion</h1>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="ui left floated header">{{ feedback.title }}</h2>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="collapsing">Description</td>
+            <td>{{ feedback.description }}</td>
+        </tr>
+        <tr>
+            <td class="collapsing">Type</td>
+            <td>{{ feedback.get_type_display }}</td>
+        </tr>
+        <tr>
+            <td class="collapsing">To</td>
+            <td>{{ feedback.get_to_display }}</td>
+        </tr>
+        <tr>
+            <td class="collapsing">Category</td>
+            <td>{{ feedback.get_category_display }}</td>
+        </tr>
+        <tr>
+            <td class="collapsing">Image</td>
+            <td><img src="{{ feedback.image.url }}" class="ui big image" alt="No images provided"></td>
+        </tr>
+        <tr>
+            <td class="collapsing">Status</td>
+            <td>{{ feedback.get_status_display }}</td>
+        </tr>
+        <tr>
+            <td class="collapsing">Date and time</td>
+            <td>{{ feedback.time }}</td>
+        </tr>
+        <tr>
+            <td class="collapsing"><span class="red-text fa fa-heart"></span></td>
+            <td>{{ feedback.patrons.count }}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="2">
+                Submitted by
+                <div class="ui card">
+                    <div class="content">
+                        {% if feedback.author.image %}
+                            <img src="{{ feedback.author.image.url }}"
+                                 class="ui left floated mini circular image">
+                        {% else %}
+                            <svg class="ui left floated mini circular image"
+                                 data-jdenticon-hash="{{ feedback.author.name_email_hash }}"
+                                 viewBox="0 0 100 100">
+                            </svg>
+                        {% endif %}
+                        <div class="header">{{ feedback.author.name }}</div>
+                        {% if request.session.user_email == feedback.author.email %}
+                            <div class="meta">That's you!</div>
+                        {% else %}
+                            <div class="meta">{{ feedback.author.get_post_display }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </th>
+        </tr>
+        </tfoot>
+    </table>
+    <h2>Discussion</h2>
+    <div class="ui segment" id="comments-section">
+        <div class="ui comments">
+            {% for comment in feedback.comment_set.all %}
+                {% if not comment.upon_comment %}
+                    <div class="comment">
+                        <div class="avatar">
+                            {% if comment.author.image %}
+                                <img src="{{ comment.author.image.url }}">
+                            {% else %}
+                                <svg data-jdenticon-hash="{{ comment.author.name_email_hash }}" viewBox="0 0 100 100">
+                                </svg>
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                            <div class="author">{{ comment.author.name }}</div>
+                            <div class="metadata">
+                                <span class="date">{{ comment.time }}</span>
+                                 <span class="blue-text agrees">
+                                    {{ comment.subscribers.count }}
+                                    <span class="fa fa-thumbs-up"></span>
+                                 </span>
+                            </div>
+                            <div class="text">{{ comment.text }}</div>
+                            <div class="actions">
+                                <a href="#"><span class="fa fa-thumbs-o-up"></span>&nbsp;&nbsp;&nbsp;Agree?</a>
+                            </div>
+                        </div>
+                        {% if comment.comment_set.count > 0 %}
+                            <div class="comments">
+                                {% for reply in comment.comment_set.all %}
+                                    <div class="comment">
+                                        <div class="avatar">
+                                            {% if reply.author.image %}
+                                                <img src="{{ reply.author.image.url }}">
+                                            {% else %}
+                                                <svg data-jdenticon-hash="{{ reply.author.name_email_hash }}"
+                                                     viewBox="0 0 100 100">
+                                                </svg>
+                                            {% endif %}
+                                        </div>
+                                        <div class="content">
+                                            <div class="author">{{ reply.author.name }}</div>
+                                            <div class="metadata">
+                                                <span class="date">{{ reply.time }}</span>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <span class="blue-text agrees">
+                                                    {{ reply.subscribers.count }}
+                                                    <span class="fa fa-thumbs-up"></span>
+                                                </span>
+                                            </div>
+                                            <div class="text">{{ reply.text }}</div>
+                                            <div class="actions">
+                                                <a href="#">
+                                                    <span class="fa fa-thumbs-o-up"></span>&nbsp;&nbsp;&nbsp;Agree?
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
