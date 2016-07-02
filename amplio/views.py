@@ -121,7 +121,9 @@ def detail(request, feedback_id):
             else:
                 user = models.User.objects.get(email=email)
             feedback = models.Feedback.objects.get(pk=feedback_id)
+            tier_one = feedback.comment_set.filter(upon_comment=None)
             return render(request, 'amplio/detail.html', {
+                'tier_one': tier_one,
                 'user': user,
                 'feedback': feedback,
             })
