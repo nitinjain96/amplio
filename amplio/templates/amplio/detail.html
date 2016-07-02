@@ -99,7 +99,7 @@
                                 <div class="author">{{ comment.author.name }}</div>
                                 <div class="metadata">
                                     <span class="date">{{ comment.time }}</span>
-                                    <span class="fa fa-thumbs-up"></span>
+                                    <span class="blue-text fa fa-thumbs-up"></span>
                                     <span class="blue-text" id="subscribers-{{ comment.id }}">
                                         {{ comment.subscribers.count }}
                                     </span>
@@ -117,7 +117,9 @@
                                         </a>
                                     {% else %}
                                         <a href="{% url 'amplio:sign_in' %}">
-                                            <span class="fa fa-sign-in"></span>Sign in to agree/disagree
+                                            <span class="teal-text fa fa-sign-in"></span>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <span class="teal-text">Sign in to agree/disagree</span>
                                         </a>
                                     {% endif %}
                                 </div>
@@ -140,7 +142,7 @@
                                                 <div class="metadata">
                                                     <span class="date">{{ reply.time }}</span>
                                                     &nbsp;&nbsp;&nbsp;
-                                                    <span class="fa fa-thumbs-up"></span>
+                                                    <span class="blue-text fa fa-thumbs-up"></span>
                                                     <span class="blue-text" id="subscribers-{{ reply.id }}">
                                                         {{ reply.subscribers.count }}
                                                     </span>
@@ -150,7 +152,7 @@
                                                     {% if user %}
                                                         <a href="#" data-comment-id="{{ reply.id }}"
                                                            onclick="subscribe(this, '{% url 'amplio:subscribe' %}')">
-                                                            {% if user in comment.subscribers.all %}
+                                                            {% if user in reply.subscribers.all %}
                                                                 <span class="blue-text fa fa-thumbs-up"
                                                                       data-subscribed="true"></span>
                                                             {% else %}
@@ -160,7 +162,9 @@
                                                         </a>
                                                     {% else %}
                                                         <a href="{% url 'amplio:sign_in' %}">
-                                                            <span class="fa fa-sign-in"></span>Sign in to agree/disagree
+                                                            <span class="teal-text fa fa-sign-in"></span>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <span class="teal-text">Sign in to agree/disagree</span>
                                                         </a>
                                                     {% endif %}
                                                 </div>
