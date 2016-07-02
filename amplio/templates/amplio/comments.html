@@ -1,0 +1,45 @@
+{% for comment in comment_set %}
+    <div class="comment">
+        <div class="avatar">
+            {% if comment.author.image %}
+                <img src="{{ comment.author.image.url }}">
+            {% else %}
+                <svg data-jdenticon-hash="{{ comment.author.name_email_hash }}"
+                     viewBox="0 0 100 100">
+                </svg>
+            {% endif %}
+        </div>
+        <div class="content">
+            <div class="author">{{ comment.author.name }}</div>
+            <div class="metadata">
+                <span class="date">{{ comment.time }}</span>
+                <span class="blue-text fa fa-thumbs-up"></span>
+                <span class="blue-text" id="subscribers-{{ comment.id }}">{{ comment.subscribers.count }}</span>
+            </div>
+            <div class="text">{{ comment.text }}</div>
+            <div class="actions">
+                {% if user %}
+                    <a href="#" data-comment-id="{{ comment.id }}"
+                       onclick="subscribe(this, '{% url 'amplio:subscribe' %}')">
+                        {% if user in comment.subscribers.all %}
+                            <span class="blue-text fa fa-thumbs-up" data-subscribed="true"></span>
+                        {% else %}
+                            <span class="fa fa-thumbs-o-up" data-subscribed="false"></span>
+                        {% endif %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'amplio:sign_in' %}">
+                        <span class="teal-text fa fa-sign-in"></span>
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="teal-text">Sign in to agree/disagree</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% if comment.comment_set.count > 0 %}
+            <div class="comments">
+                {% include 'amplio/comments.html' with comment_set=comment.comment_set.all %}
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
