@@ -74,6 +74,25 @@ function vote(div, url) {
     }
 }
 
+function subscribe(a, url) {
+    var $a = $(a);
+    var comment_id = parseInt($a.attr('data-comment-id'));
+    $.post(
+        url,
+        {id: comment_id},
+        function (data) {
+            $('#subscribers-' + comment_id).html(data);
+        }
+    );
+    var $span = $a.find('span');
+    if ($span.attr('data-subscribed') === 'true') {
+        $a.html('<span class="fa fa-thumbs-o-up" data-subscribed="false"></span>');
+    } else {
+        $a.html('<span class="blue-text fa fa-thumbs-up" data-subscribed="true"></span>');
+    }
+    event.preventDefault();
+}
+
 function removeImage(url, reload) {
     $.post(
         url,
