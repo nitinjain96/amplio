@@ -99,14 +99,27 @@
                                 <div class="author">{{ comment.author.name }}</div>
                                 <div class="metadata">
                                     <span class="date">{{ comment.time }}</span>
-                                 <span class="blue-text agrees">
-                                    {{ comment.subscribers.count }}
                                     <span class="fa fa-thumbs-up"></span>
-                                 </span>
+                                    <span class="blue-text" id="subscribers-{{ comment.id }}">
+                                        {{ comment.subscribers.count }}
+                                    </span>
                                 </div>
                                 <div class="text">{{ comment.text }}</div>
                                 <div class="actions">
-                                    <a href="#"><span class="fa fa-thumbs-o-up"></span>&nbsp;&nbsp;&nbsp;Agree?</a>
+                                    {% if user %}
+                                        <a href="#" data-comment-id="{{ comment.id }}"
+                                           onclick="subscribe(this, '{% url 'amplio:subscribe' %}')">
+                                            {% if user in comment.subscribers.all %}
+                                                <span class="blue-text fa fa-thumbs-up" data-subscribed="true"></span>
+                                            {% else %}
+                                                <span class="fa fa-thumbs-o-up" data-subscribed="false"></span>
+                                            {% endif %}
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'amplio:sign_in' %}">
+                                            <span class="fa fa-sign-in"></span>Sign in to agree/disagree
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                             {% if comment.comment_set.count > 0 %}
@@ -127,16 +140,29 @@
                                                 <div class="metadata">
                                                     <span class="date">{{ reply.time }}</span>
                                                     &nbsp;&nbsp;&nbsp;
-                                                <span class="blue-text agrees">
-                                                    {{ reply.subscribers.count }}
                                                     <span class="fa fa-thumbs-up"></span>
-                                                </span>
+                                                    <span class="blue-text" id="subscribers-{{ reply.id }}">
+                                                        {{ reply.subscribers.count }}
+                                                    </span>
                                                 </div>
                                                 <div class="text">{{ reply.text }}</div>
                                                 <div class="actions">
-                                                    <a href="#">
-                                                        <span class="fa fa-thumbs-o-up"></span>&nbsp;&nbsp;&nbsp;Agree?
-                                                    </a>
+                                                    {% if user %}
+                                                        <a href="#" data-comment-id="{{ reply.id }}"
+                                                           onclick="subscribe(this, '{% url 'amplio:subscribe' %}')">
+                                                            {% if user in comment.subscribers.all %}
+                                                                <span class="blue-text fa fa-thumbs-up"
+                                                                      data-subscribed="true"></span>
+                                                            {% else %}
+                                                                <span class="fa fa-thumbs-o-up"
+                                                                      data-subscribed="false"></span>
+                                                            {% endif %}
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{% url 'amplio:sign_in' %}">
+                                                            <span class="fa fa-sign-in"></span>Sign in to agree/disagree
+                                                        </a>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
@@ -151,4 +177,7 @@
             <p>Have anything to say? You're welcome to start a discussion!</p>
         {% endif %}
     </div>
+    <script>
+        setUpAjax();
+    </script>
 {% endblock %}
