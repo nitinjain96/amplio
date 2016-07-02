@@ -71,7 +71,7 @@ def compose(request):
                 description=description,
                 type=feedback_type, to=to,
                 category=category,
-                by=user
+                author=user
             )
             feedback.save()
             # Now object has an ID which will be used in setting the save path for the image
