@@ -65,6 +65,10 @@ main {
     color: #2185d0;
 }
 
+.teal-text {
+    color: #00b5ad;
+}
+
 .ui.form {
     width: 50%;
 }
