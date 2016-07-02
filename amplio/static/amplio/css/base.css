@@ -61,6 +61,10 @@ main {
     color: #db2828;
 }
 
+.blue-text {
+    color: #2185d0;
+}
+
 .ui.form {
     width: 50%;
 }
