@@ -240,6 +240,24 @@ def sign_out(request):
     return redirect(reverse('amplio:index'))
 
 
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.session.get('user_email', '')
+        if len(email) == 0:
+            raise Http404('You need to be logged in to access this interface')
+        user = models.User.objects.get(email=email)
+        comment_id = request.POST.get('id')
+        comment = models.Comment.objects.get(pk=comment_id)
+        if comment.subscribers.filter(email=email).exists():
+            comment.subscribers.remove(user)
+        else:
+            comment.subscribers.add(user)
+        comment.save()
+        return HttpResponse(comment.subscribers.count())
+    else:
+        raise Http404('No GET interface has been defined for amplio.views.subscribe')
+
+
 def terms(request):
     return render(request, 'amplio/terms.html')
 
