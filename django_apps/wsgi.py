@@ -6,8 +6,8 @@ import site
 site.addsitedir('/home/dhruv/Environments/python3.5env/lib/python3.5/site-packages')
 
 # Add the app directory to the PYTHONPATH
-sys.path.append('/home/dhruv/PycharmProjects/django-apps')
-sys.path.append('/home/dhruv/PycharmProjects/django-apps/django_apps')
+sys.path.append('/home/dhruv/Documents/PyCharmProjects/django-apps')
+sys.path.append('/home/dhruv/Documents/PyCharmProjects/django-apps/django_apps')
 
 # Load settings from django_apps
 os.environ['DJANGO_SETTINGS_MODULE'] = 'django_apps.settings'
