@@ -58,11 +58,12 @@ class Comment(models.Model):
     text = models.TextField()
 
     time = models.DateTimeField(default=timezone.now)
-    votes = models.IntegerField(default=0)
 
     upon_feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
     upon_comment = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    subscribers = models.ManyToManyField(User, related_name='subscribed_comment_set')
 
     def __str__(self):
         return self.text
