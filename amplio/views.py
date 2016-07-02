@@ -12,7 +12,7 @@ from amplio import models, forms
 def populate_session(request, user):
     request.session['user_name'] = user.name
     request.session['user_email'] = user.email
-    request.session['user_name_email_hash'] = md5((user.email + user.name).encode('utf-8')).hexdigest()
+    request.session['user_name_email_hash'] = user.name_email_hash
     if user.image:
         request.session['user_image_url'] = user.image.url
     else:
@@ -37,7 +37,7 @@ def browse(request):
     feedback_list = None
     if request.method == 'GET':
         feedback_list = models.Feedback.objects.annotate(patron_count=Count('patrons')).order_by('-patron_count')[:20]
-    email = request.session.get('user_email')
+    email = request.session.get('user_email', '')
     if len(email) == 0:
         user = None
     else:
@@ -112,6 +112,15 @@ def contact(request):
             })
 
 
+def detail(request, feedback_id):
+    if request.method == 'GET':
+        try:
+            feedback = models.Feedback.objects.get(pk=feedback_id)
+            return render(request, 'amplio/detail.html', {'feedback': feedback})
+        except models.Feedback.DoesNotExist:
+            raise Http404('This feedback item does not exist')
+
+
 def profile(request):
     email = request.session.get('user_email', '')
     if len(email) == 0:
@@ -155,14 +164,14 @@ def remove_image(request):
     if request.method == 'POST':
         email = request.session.get('user_email', '')
         if len(email) == 0:
-            return Http404('You need to be logged in to access this interface')
+            raise Http404('You need to be logged in to access this interface')
         user = models.User.objects.get(email=email)
         user.image = None
         user.save()
         populate_session(request, user)
         return HttpResponse('OK')
     else:
-        return Http404('No GET interface has been defined for amplio.views.remove_image')
+        raise Http404('No GET interface has been defined for amplio.views.remove_image')
 
 
 def search(request):
@@ -203,9 +212,16 @@ def sign_up(request):
             new_form = forms.SignUpForm()
             name = form.cleaned_data.get('name')
             email = form.cleaned_data.get('email')
+            name_email_hash = md5((email + name).encode('utf-8')).hexdigest()
             password = form.cleaned_data.get('password')
             password_hash = md5(password.encode('utf-8')).hexdigest()
-            user = models.User(name=name, email=email, password_hash=password_hash, post=1)
+            user = models.User(
+                name=name,
+                email=email,
+                name_email_hash=name_email_hash,
+                password_hash=password_hash,
+                post=1
+            )
             user.save()
             return render(request, 'amplio/sign-up.html', {
                 'state': 'success',
@@ -232,7 +248,7 @@ def vote(request):
     if request.method == 'POST':
         email = request.session.get('user_email', '')
         if len(email) == 0:
-            return Http404('You need to be logged in to access this interface')
+            raise Http404('You need to be logged in to access this interface')
         user = models.User.objects.get(email=email)
         feedback_id = request.POST.get('id')
         feedback = models.Feedback.objects.get(pk=feedback_id)
