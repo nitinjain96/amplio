@@ -87,7 +87,7 @@
     <h2>Discussion</h2>
     <div class="ui segment" id="comments-section">
         {% if feedback.comment_set.count > 0 %}
-            <div class="ui comments">
+            <div class="ui threaded comments">
                 {% include 'amplio/comments.html' with comment_set=tier_one %}
             </div>
         {% else %}
