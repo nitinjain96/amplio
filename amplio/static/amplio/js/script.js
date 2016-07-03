@@ -25,6 +25,13 @@ function initializePopups(string) {
     $(string).popup({inline: true});
 }
 
+function scrollTo(string) {
+    var offset = $(string).offset();
+    $('html, body').animate({
+        scrollTop: offset.top
+    });
+}
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -91,6 +98,53 @@ function subscribe(a, url) {
         $a.html('<span class="blue-text fa fa-thumbs-up" data-subscribed="true"></span>');
     }
     event.preventDefault();
+}
+
+function showReplyForm(a, user_email) {
+    var $a = $(a);
+    var comment_id = $a.attr('data-comment-id');
+    var feedback_id = $a.attr('data-feedback-id');
+    $a.hide();
+    var $comment = $('#comment-' + comment_id);
+    var form_text = '' +
+        '<form id="form-' + comment_id + '" class="ui form">\n' +
+        '    <div class="field">\n' +
+        '       <label>Reply:</label>\n' +
+        '       <input type="text" placeholder="Enter a reply">\n' +
+        '   </div>\n' +
+        '   <button type="button" \n' +
+        '           class="ui primary button"\n' +
+        '           onclick="submitReply(' + '\'' + user_email + '\', ' + feedback_id + ',' + comment_id + ')">\n' +
+        '       <span class="fa fa-comments-o"></span>&nbsp;&nbsp;&nbsp;Reply\n' +
+        '   </button>\n' +
+        '</form>';
+    $comment.html($comment.html() + form_text);
+    scrollTo('#form-' + comment_id);
+    event.preventDefault();
+}
+
+function submitReply(user_email, feedback_id, comment_id) {
+    var $form = $('#form-' + comment_id);
+    var $input = $form.find('input');
+    var text = $input.val();
+    $.post(
+        '/amplio/reply/',
+        {
+            user_email: user_email,
+            upon_feedback: feedback_id,
+            upon_comment: comment_id,
+            text: text
+        },
+        function (data) {
+            try {
+                var new_comment_id = parseInt(data);
+                location.reload(true);
+                scrollTo('#comment-' + new_comment_id);
+            } catch (err) {
+                console.log('Some error occurred. This is a gift for you: ' + data);
+            }
+        }
+    );
 }
 
 function removeImage(url, reload) {
