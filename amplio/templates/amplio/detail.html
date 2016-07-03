@@ -49,7 +49,12 @@
         </tr>
         <tr>
             <td class="collapsing"><span class="red-text fa fa-heart"></span></td>
-            <td>{{ feedback.patrons.count }}</td>
+            <td>
+                {{ feedback.patrons.count }}
+                {% if user in feedback.patrons.all %}
+                    (including you!)
+                {% endif %}
+            </td>
         </tr>
         </tbody>
         <tfoot>
