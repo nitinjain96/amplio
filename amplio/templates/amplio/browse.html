@@ -37,7 +37,8 @@
                             </div>
                             {% if request.session.user_email %}
                                 {% if feedback.author_id == request.session.user_email %}
-                                    <button class="ui negative button vote-on-self-feedback" data-position="left center">
+                                    <button class="ui red button vote-on-self-feedback"
+                                            data-position="left center">
                                         <span class="fa fa-frown-o"></span>
                                     </button>
                                     <div class="ui inverted popup">
