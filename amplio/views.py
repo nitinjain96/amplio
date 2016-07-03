@@ -184,6 +184,35 @@ def remove_image(request):
         raise Http404('No GET interface has been defined for amplio.views.remove_image')
 
 
+def reply(request):
+    if request.method == 'POST':
+        email = request.session.get('user_email', '')
+        if len(email) == 0:
+            raise Http404('You need to be logged in to access this interface')
+        user = models.User.objects.get(email=email)
+
+        comment_id = request.POST.get('upon_comment', '')
+        if comment_id == '':
+            return HttpResponse('Improper input upon_comment')
+        comment = models.Comment.objects.get(pk=comment_id)
+
+        feedback_id = request.POST.get('upon_feedback', '')
+        if comment_id == '':
+            return HttpResponse('Improper input upon_feedback')
+        feedback = models.Feedback.objects.get(pk=feedback_id)
+
+        new_comment = models.Comment(
+            text=request.POST.get('text'),
+            upon_feedback=feedback,
+            upon_comment=comment,
+            author=user,
+        )
+        new_comment.save()
+        return HttpResponse(new_comment.id)
+    else:
+        raise Http404('No GET interface has been defined for amplio.views.reply')
+
+
 def search(request):
     return HttpResponse("Work in progress")
 
