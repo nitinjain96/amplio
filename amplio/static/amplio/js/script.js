@@ -105,9 +105,9 @@ function showReplyForm(a, user_email) {
     var comment_id = $a.attr('data-comment-id');
     var feedback_id = $a.attr('data-feedback-id');
     $a.hide();
-    var $comment = $('#comment-' + comment_id);
+    var $content = $('#content-' + comment_id);
     var form_text = '' +
-        '<form id="form-' + comment_id + '" class="ui form">\n' +
+        '<form id="form-' + comment_id + '" class="ui reply form">\n' +
         '    <div class="field">\n' +
         '       <label>Reply:</label>\n' +
         '       <input type="text" placeholder="Enter a reply">\n' +
@@ -118,7 +118,7 @@ function showReplyForm(a, user_email) {
         '       <span class="fa fa-comments-o"></span>&nbsp;&nbsp;&nbsp;Reply\n' +
         '   </button>\n' +
         '</form>';
-    $comment.html($comment.html() + form_text);
+    $content.html($content.html() + form_text);
     scrollTo('#form-' + comment_id);
     event.preventDefault();
 }

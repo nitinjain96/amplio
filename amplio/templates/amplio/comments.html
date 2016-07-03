@@ -9,7 +9,7 @@
                 </svg>
             {% endif %}
         </div>
-        <div class="content">
+        <div class="content" id="content-{{ comment.id }}">
             <div class="author">{{ comment.author.name }}</div>
             <div class="metadata">
                 <span class="date">{{ comment.time }}</span>
