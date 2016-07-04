@@ -112,7 +112,7 @@ function showReplyForm(a, user_email) {
         '       <label>Reply:</label>\n' +
         '       <input type="text" placeholder="Enter a reply">\n' +
         '   </div>\n' +
-        '   <button type="button" \n' +
+        '   <button type="submit" \n' +
         '           class="ui primary button"\n' +
         '           onclick="submitReply(' + '\'' + user_email + '\', ' + feedback_id + ',' + comment_id + ')">\n' +
         '       <span class="fa fa-comments-o"></span>&nbsp;&nbsp;&nbsp;Reply\n' +
