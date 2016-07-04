@@ -25,7 +25,7 @@
                     </a>
                     Agree
                     <a href="#" data-comment-id="{{ comment.id }}"
-                       onclick="subscribe(this, '{% url 'amplio:subscribe' %}')">
+                       onclick="subscribe(this)">
                         {% if user in comment.subscribers.all %}
                             <span class="blue-text fa fa-thumbs-up" data-subscribed="true"></span>
                         {% else %}

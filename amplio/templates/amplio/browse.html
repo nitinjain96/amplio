@@ -46,7 +46,7 @@
                                     </div>
                                 {% else %}
                                     <button class="ui vote button" data-feedback-id="{{ feedback.id }}"
-                                            onclick="vote(this, '{% url 'amplio:vote' %}')">
+                                            onclick="vote(this)">
                                         {% if user in feedback.patrons.all %}
                                             <span class="red-text fa fa-heart" data-voted="true"></span>
                                         {% else %}
