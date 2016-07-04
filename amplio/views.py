@@ -194,22 +194,26 @@ def reply(request):
         comment_id = request.POST.get('upon_comment', '')
         if comment_id == '':
             return HttpResponse('Improper input upon_comment')
-        if comment_id == -1:
-            comment = None
-        else:
-            comment = models.Comment.objects.get(pk=comment_id)
 
         feedback_id = request.POST.get('upon_feedback', '')
         if comment_id == '':
             return HttpResponse('Improper input upon_feedback')
         feedback = models.Feedback.objects.get(pk=feedback_id)
 
-        new_comment = models.Comment(
-            text=request.POST.get('text'),
-            upon_feedback=feedback,
-            upon_comment=comment,
-            author=user,
-        )
+        if comment_id == '-1':
+            new_comment = models.Comment(
+                text=request.POST.get('text'),
+                upon_feedback=feedback,
+                author=user,
+            )
+        else:
+            comment = models.Comment.objects.get(pk=comment_id)
+            new_comment = models.Comment(
+                text=request.POST.get('text'),
+                upon_feedback=feedback,
+                upon_comment=comment,
+                author=user,
+            )
         new_comment.save()
         return HttpResponse(new_comment.id)
     else:
