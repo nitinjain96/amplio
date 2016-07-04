@@ -25,13 +25,6 @@ function initializePopups(string) {
     $(string).popup({inline: true});
 }
 
-function scrollTo(string) {
-    var offset = $(string).offset();
-    $('html, body').animate({
-        scrollTop: offset.top
-    });
-}
-
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -63,11 +56,11 @@ function setUpAjax() {
     });
 }
 
-function vote(div, url) {
+function vote(div) {
     var $div = $(div);
     var feedback_id = parseInt($div.attr('data-feedback-id'));
     $.post(
-        url,
+        'amplio/vote',
         {id: feedback_id},
         function (data) {
             $('#votes-' + feedback_id).html(data);
@@ -81,11 +74,11 @@ function vote(div, url) {
     }
 }
 
-function subscribe(a, url) {
+function subscribe(a) {
     var $a = $(a);
     var comment_id = parseInt($a.attr('data-comment-id'));
     $.post(
-        url,
+        'amplio/subscribe',
         {id: comment_id},
         function (data) {
             $('#subscribers-' + comment_id).html(data);
@@ -114,12 +107,11 @@ function showReplyForm(a, user_email) {
         '   </div>\n' +
         '   <button type="submit" \n' +
         '           class="ui primary button"\n' +
-        '           onclick="submitReply(' + '\'' + user_email + '\', ' + feedback_id + ',' + comment_id + ')">\n' +
+        '           onclick="submitReply(' + '\'' + user_email + '\', ' + feedback_id + ', ' + comment_id + ')">\n' +
         '       <span class="fa fa-comments-o"></span>&nbsp;&nbsp;&nbsp;Reply\n' +
         '   </button>\n' +
         '</form>';
     $content.html($content.html() + form_text);
-    scrollTo('#form-' + comment_id);
     event.preventDefault();
 }
 
@@ -136,12 +128,10 @@ function submitReply(user_email, feedback_id, comment_id) {
             text: text
         },
         function (data) {
-            try {
-                var new_comment_id = parseInt(data);
+            if (data === 'OK') {
                 location.reload(true);
-                scrollTo('#comment-' + new_comment_id);
-            } catch (err) {
-                console.log('Some error occurred. This is a gift for you: ' + data);
+            } else {
+                console.log('OK was not returned');
             }
         }
     );
@@ -160,24 +150,22 @@ function submitTierOne(user_email, feedback_id) {
             text: text
         },
         function (data) {
-            try {
-                var new_comment_id = parseInt(data);
+            if (data === 'OK') {
                 location.reload(true);
-                scrollTo('#comment-' + new_comment_id);
-            } catch (err) {
-                console.log('Some error occurred. This is a gift for you: ' + data);
+            } else {
+                console.log('OK was not returned');
             }
         }
     );
 }
 
-function removeImage(url, reload) {
+function removeImage() {
     $.post(
-        url,
+        '/amplio/remove-image/',
         {},
         function (data) {
             if (data === 'OK') {
-                goTo(reload);
+                location.reload(true);
             } else {
                 console.log('OK was not returned');
             }
