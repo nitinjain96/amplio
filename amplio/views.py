@@ -215,7 +215,7 @@ def reply(request):
                 author=user,
             )
         new_comment.save()
-        return HttpResponse(new_comment.id)
+        return HttpResponse('OK')
     else:
         raise Http404('No GET interface has been defined for amplio.views.reply')
 
