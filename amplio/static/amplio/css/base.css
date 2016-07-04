@@ -85,7 +85,7 @@ i.icon {
     cursor: default;
 }
 
-#comments-section {
+#comments-section, #tier-one-comments {
     width: 100%;
 }
 

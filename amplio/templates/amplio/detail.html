@@ -94,6 +94,32 @@
             <p>Have anything to say? You're welcome to start a discussion!</p>
         {% endif %}
     </div>
+    <div class="ui segment" id="tier-one-comments">
+        {% if request.session.user_email %}
+            <form class="ui form" id="tier-one-comment-form">
+                <div class="field">
+                    <label>Comment:</label>
+                    <input type="text" placeholder="Comment">
+                </div>
+                <button type="submit"
+                        onclick="submitTierOne('{{ request.session.user_email }}', {{ feedback.id }})"
+                        class="ui primary button">
+                    <span class="fa fa-comment"></span>&nbsp;&nbsp;&nbsp;Comment
+                </button>
+            </form>
+        {% else %}
+            <p>
+                You haven't signed in! That's a problem because we don't allow people to contribute to the discussions
+                without signing in.
+            </p>
+            <a href="{% url 'amplio:sign_in' %}" class="ui teal button">
+                <span class="fa fa-sign-in"></span>&nbsp;&nbsp;&nbsp;Sign in
+            </a>
+            <a href="{% url 'amplio:sign_up' %}" class="ui teal button">
+                <span class="fa fa-user-plus"></span>&nbsp;&nbsp;&nbsp;Sign up
+            </a>
+        {% endif %}
+    </div>
     <script>
         setUpAjax();
     </script>

@@ -110,7 +110,7 @@ function showReplyForm(a, user_email) {
         '<form id="form-' + comment_id + '" class="ui reply form">\n' +
         '    <div class="field">\n' +
         '       <label>Reply:</label>\n' +
-        '       <input type="text" placeholder="Enter a reply">\n' +
+        '       <input type="text" placeholder="Reply">\n' +
         '   </div>\n' +
         '   <button type="submit" \n' +
         '           class="ui primary button"\n' +
@@ -133,6 +133,30 @@ function submitReply(user_email, feedback_id, comment_id) {
             user_email: user_email,
             upon_feedback: feedback_id,
             upon_comment: comment_id,
+            text: text
+        },
+        function (data) {
+            try {
+                var new_comment_id = parseInt(data);
+                location.reload(true);
+                scrollTo('#comment-' + new_comment_id);
+            } catch (err) {
+                console.log('Some error occurred. This is a gift for you: ' + data);
+            }
+        }
+    );
+}
+
+function submitTierOne(user_email, feedback_id) {
+    var $form = $('#tier-one-comment-form');
+    var $input = $form.find('input');
+    var text = $input.val();
+    $.post(
+        '/amplio/reply/',
+        {
+            user_email: user_email,
+            upon_feedback: feedback_id,
+            upon_comment: -1,
             text: text
         },
         function (data) {
