@@ -1,13 +1,8 @@
 import os
 import sys
-import site
-
-# Add the site-packages of the chosen virtual environment to work with
-site.addsitedir('/home/dhruv/Environments/python3.5env/lib/python3.5/site-packages')
 
 # Add the app directory to the PYTHONPATH
 sys.path.append('/home/dhruv/Documents/PyCharmProjects/django-apps')
-sys.path.append('/home/dhruv/Documents/PyCharmProjects/django-apps/django_apps')
 
 # Load settings from django_apps
 os.environ['DJANGO_SETTINGS_MODULE'] = 'django_apps.settings'
