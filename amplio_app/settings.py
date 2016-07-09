@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'amplio_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'amplio_app',
-        'USER': 'django_apps_user',
-        'PASSWORD': 'django_apps_user_password',
+        'NAME': 'amplio',
+        'USER': 'amplio_user',
+        'PASSWORD': 'amplio_password',
         'HOST': 'localhost',
         'POST': '',
     }
