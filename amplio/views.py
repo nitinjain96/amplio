@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 
-from amplio import models, forms
+from amplio import models, forms, choice_constants
 
 
 def populate_session(request, user):
@@ -266,7 +266,7 @@ def sign_up(request):
                 email=email,
                 name_email_hash=name_email_hash,
                 password_hash=password_hash,
-                post=1
+                post=choice_constants.STUDENT
             )
             user.save()
             return render(request, 'amplio/sign-up.html', {
