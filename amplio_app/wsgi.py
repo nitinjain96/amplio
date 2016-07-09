@@ -2,7 +2,7 @@ import os
 import sys
 
 # Add the app directory to the PYTHONPATH
-sys.path.append('/home/dhruv/Documents/PyCharmProjects/django-apps')
+sys.path.append('/home/dhruv/Documents/PyCharmProjects/amplio')
 
 # Load settings from amplio_app
 os.environ['DJANGO_SETTINGS_MODULE'] = 'amplio_app.settings'
