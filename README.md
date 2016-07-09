@@ -1,11 +1,11 @@
 # amplio
-This repository is a collection of Django web applications, made by me, [Dhruv Bhanushali](http://dhruvkb.github.io), a developer and engineer-physicist at the [Indian Institute of Technology at Roorkee](http://www.iitr.ac.in) in Uttarakhand, India.
+This is Amplio, a Django web application, made by me, [Dhruv Bhanushali](http://dhruvkb.github.io), a developer and engineer-physicist at the [Indian Institute of Technology at Roorkee](http://www.iitr.ac.in) in Uttarakhand, India.
 
 I am a prolific member of [Information Management Group](http://img.channeli.in), the computing group of IIT Roorkee credited with maintaining the technological backbone of the institute.
 
-This repository is my summer assignment for learning web development with Django.
+This repository contains my summer assignment that revolved around learning web development with Django.
 
-## Amplio
+## Introduction
 Amplio is a feedback application for IIT Roorkee. It enables the students of IIT to voice any and all problems or difficulties related to the technical aspects of the institute, so that IMG or other concerned authorities can look into the issue and take suitable action.
 
 ## Features
@@ -20,10 +20,10 @@ Although Amplio is pretty open to non-registered users, they are only silent spe
 
 The next step is to browse feedback and get some inspiration. See the kinds of feedback on the site. If you notice some issue or have some idea for the improvement of life in IIT Roorkee that is yet to be reported, you ought to do that yourself! Go to the compose page and submit your own feedback. If that idea has been reported already, just upvote it.
 
-You can freely participate in discussions as well.
+You can freely participate in discussions as well. Comment on the feedback, reply to an existing comment or reply and subscribe to comments or replies that you agree with.
 
 ## Requirements
-If you somehow decide to clone this repo, you'll need a bunch of things ready.
+If you for some reason (I can't think of a single one) decide to clone this repository, you'll need a bunch of things to make it work.
 
 ### Python
 Version 3.5.1
