@@ -49,7 +49,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'django_apps.urls'
+ROOT_URLCONF = 'amplio_app.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_apps.wsgi.application'
+WSGI_APPLICATION = 'amplio_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'django_apps.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_apps',
+        'NAME': 'amplio_app',
         'USER': 'django_apps_user',
         'PASSWORD': 'django_apps_user_password',
         'HOST': 'localhost',

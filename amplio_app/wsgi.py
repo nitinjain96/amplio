@@ -4,8 +4,8 @@ import sys
 # Add the app directory to the PYTHONPATH
 sys.path.append('/home/dhruv/Documents/PyCharmProjects/django-apps')
 
-# Load settings from django_apps
-os.environ['DJANGO_SETTINGS_MODULE'] = 'django_apps.settings'
+# Load settings from amplio_app
+os.environ['DJANGO_SETTINGS_MODULE'] = 'amplio_app.settings'
 
 # Activate your virtual environment
 activate_env = "/home/dhruv/Environments/python3.5env/bin/activate_this.py"
