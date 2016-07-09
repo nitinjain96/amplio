@@ -1,9 +1,12 @@
-# django-apps
+# amplio
 This repository is a collection of Django web applications, made by me, [Dhruv Bhanushali](http://dhruvkb.github.io), a developer and engineer-physicist at the [Indian Institute of Technology at Roorkee](http://www.iitr.ac.in) in Uttarakhand, India.
 
 I am a prolific member of [Information Management Group](http://img.channeli.in), the computing group of IIT credited with maintaining the technological backbone of the institute.
 
 This repository is my summer assignment for learning web programming with Django.
+
+## Amplio
+Amplio is a feedback application for IIT Roorkee. It enables the students of IIT to voice any and all problems and difficulties related to the technical aspects of the institute, so that IMG or other concerned authorities can look into the issue and take suitable action.
 
 ## Requirements
 If you somehow decide to clone this repo, you'll need a bunch of things ready.
