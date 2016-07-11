@@ -38,10 +38,10 @@ libapache2-mod-wsgi-py3
 ### PIP Packages
 This is the output of pip freeze.
 
--dj-database-url==0.4.1
--Django==1.9.7
--gunicorn==19.6.0
--Pillow==3.3.0
--psycopg2==2.6.1
--validate-email==1.3
--whitenoise==3.2
+* dj-database-url==0.4.1
+* Django==1.9.7
+* gunicorn==19.6.0
+* Pillow==3.3.0
+* psycopg2==2.6.1
+* validate-email==1.3
+* whitenoise==3.2
