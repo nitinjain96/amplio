@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^browse/$', views.browse, name='browse'),
     url(r'^compose/$', views.compose, name='compose'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^delete-account/$', views.delete_account, name='delete_account'),
     url(r'^detail/(?P<feedback_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^remove-image/$', views.remove_image, name='remove_image'),

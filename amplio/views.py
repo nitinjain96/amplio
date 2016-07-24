@@ -112,6 +112,17 @@ def contact(request):
             })
 
 
+def delete_account(request):
+    email = request.session.get('user_email', '')
+    if len(email) == 0:
+        return redirect(reverse('amplio:sign_in'))
+    request.session.clear()
+    request.session.flush()
+    user = models.User.objects.get(email=email)
+    user.delete()
+    return redirect(reverse('amplio:index'))
+
+
 def detail(request, feedback_id):
     if request.method == 'GET':
         try:
