@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 
 from amplio import choices, choice_constants
+from amplio_app import settings
 
 
 def user_upload_image(instance, filename):
@@ -27,7 +28,16 @@ class User(models.Model):
     post = models.IntegerField(choices=choices.USER_POST_CHOICES, default=choice_constants.STUDENT)
     image = models.ImageField(upload_to=user_upload_image, blank=True)
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['name', 'password_hash', 'post']
+
     def __str__(self):
+        return self.name
+
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
         return self.name
 
 
@@ -43,8 +53,8 @@ class Feedback(models.Model):
     time = models.DateTimeField(default=timezone.now)
     status = models.IntegerField(choices=choices.FEEDBACK_STATUS_CHOICES, default=choice_constants.REPORTED)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    patrons = models.ManyToManyField(User, related_name='patronized_feedback_set')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    patrons = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='patronized_feedback_set')
 
     def __str__(self):
         return self.title
@@ -62,8 +72,8 @@ class Comment(models.Model):
     upon_feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
     upon_comment = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    subscribers = models.ManyToManyField(User, related_name='subscribed_comment_set')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='subscribed_comment_set')
 
     def __str__(self):
         return self.text
