@@ -4,7 +4,11 @@
 
 {% block main_block %}
     <h1>Sign up</h1>
-    <h2>Fill this form quickly. We're waiting!</h2>
+    {% if state != 'success' %}
+        <h2>Fill this form quickly. We're waiting!</h2>
+    {% else %}
+        <h2>Sign-in quickly. We're waiting!</h2>
+    {% endif %}
     <form action="{% url 'amplio:sign_up' %}" method="post"
           class="ui form {% if state == 'success' %}success{% endif %}" name="sign-up">
         {% csrf_token %}
