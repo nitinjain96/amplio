@@ -172,3 +172,11 @@ function removeImage() {
         }
     )
 }
+
+function confirmDelete() {
+    $('.ui.small.modal').modal('show');
+}
+
+function cancelDelete() {
+    $('.ui.small.modal').modal('hide');
+}
