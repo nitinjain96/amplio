@@ -28,7 +28,8 @@ You can freely participate in discussions as well. Comment on the feedback, repl
 * Make sure you've installed all the requirements specified. You can use `pip install requirements.txt` for it.
 * The code right now is only compatible with PostgreSQL. If you want use MySQL or some other flavors of SQL, make changes in [settings.py](amplio_app/settings.py)
 * You may encounter some more errors while running the app, most of them which are because of unavailability of python libraries.
-* Run `python manage.py runserver <port_number>`
+* Need to install apache2 and mod_wsgi.
+* Create the apache conf file and enable the website.
 * You can also host it on your servers and have a good feedback system.
 
 ## Requirements
