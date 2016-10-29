@@ -22,6 +22,15 @@ The next step is to browse feedback and get some inspiration. See the kinds of f
 
 You can freely participate in discussions as well. Comment on the feedback, reply to an existing comment or reply and subscribe to comments or replies that you agree with.
 
+## Instructions for running the application
+
+* Clone the repository and `cd` into it.
+* Make sure you've installed all the requirements specified. You can use `pip install requirements.txt` for it.
+* The code right now is only compatible with PostgreSQL. If you want use MySQL or some other flavors of SQL, make changes in [settings.py](amplio_app/settings.py)
+* You may encounter some more errors while running the app, most of them which are because of unavailability of python libraries.
+* Run `python manage.py runserver <port_number>`
+* You can also host it on your servers and have a good feedback system.
+
 ## Requirements
 If you for some reason (I can't think of a single one) decide to clone this repository, you'll need a bunch of things to make it work.
 
